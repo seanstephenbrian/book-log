@@ -20,9 +20,11 @@ function generateLibrary(library) {
     const libraryContainer = document.querySelector('.library-container');
     library.forEach(book => {
         const loggedBook = libraryContainer.appendChild(document.createElement('div'));
+        loggedBook.classList.add('logged-book');
         for (property in book) {
             const bookProperty = loggedBook.appendChild(document.createElement('div'));
-            bookProperty.textContent = `${property}: ${book[property]}`;
+            bookProperty.classList.add(`book-${property}`);
+            bookProperty.innerHTML = `<div>${property}:</div><div>${book[property]}</div>`;
         };
     });
 }
