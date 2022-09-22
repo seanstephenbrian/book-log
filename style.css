@@ -77,8 +77,9 @@ body {
 }
 
 .logged-book {
+    color: white;
     width: calc(5*var(--rvv));
-    background: #e9ffdc;
+    background: var(--complementary);
     border-radius: 15px;
     padding: 10px;
 }
