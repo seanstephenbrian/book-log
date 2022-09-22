@@ -16,13 +16,13 @@ function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(newBook);
 }
 
-function generateLibrary(myLibrary) {
+function generateLibrary(library) {
     const libraryContainer = document.querySelector('.library-container');
-    myLibrary.forEach(book => {
+    library.forEach(book => {
         const loggedBook = libraryContainer.appendChild(document.createElement('div'));
         for (property in book) {
-            const bookInfo = document.createTextNode(`${property}`);
-            loggedBook.appendChild(bookInfo);
+            const bookProperty = loggedBook.appendChild(document.createElement('div'));
+            bookProperty.textContent = `${property}: ${book[property]}`;
         };
     });
 }
