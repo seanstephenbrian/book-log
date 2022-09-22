@@ -4,10 +4,6 @@ let myLibrary = [
     {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194, read: 'read'}
 ];
 
-
-
-
-
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -19,3 +15,16 @@ function addBookToLibrary(title, author, pages, read) {
     let newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
 }
+
+function generateLibrary(myLibrary) {
+    const libraryContainer = document.querySelector('.library-container');
+    myLibrary.forEach(book => {
+        const loggedBook = libraryContainer.appendChild(document.createElement('div'));
+        for (property in book) {
+            const bookInfo = document.createTextNode(`${property}`);
+            loggedBook.appendChild(bookInfo);
+        };
+    });
+}
+
+generateLibrary(myLibrary);
