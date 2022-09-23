@@ -65,11 +65,25 @@ function generateLog(log) {
     });
     const addBook = logContainer.appendChild(document.createElement('div'));
     addBook.classList.add('add-book');
-    addBook.innerHTML = `<img src='img/svg/add.svg' alt='Add a new book' onclick='addBook()'>`;
+    addBook.innerHTML = `<img src='img/svg/add.svg' alt='Add a new book' onclick='showAddBookForm()'>`;
 }
 
 generateLog(myLog);
 
-function addBook() {
-    
+function showAddBookForm() {
+    const mainSection = document.querySelector('.main');
+    mainSection.classList.add('blur');
+    const addBookFormContainer = document.querySelector('.add-book-form-container');
+    addBookFormContainer.classList.remove('hide');
+    const addBookForm = document.querySelector('.add-book-form');
+    addBookForm.classList.remove('hide');
+}
+
+function closeAddBookForm() {
+    const mainSection = document.querySelector('.main');
+    mainSection.classList.remove('blur');
+    const addBookFormContainer = document.querySelector('.add-book-form-container');
+    addBookFormContainer.classList.add('hide');
+    const addBookForm = document.querySelector('.add-book-form');
+    addBookForm.classList.add('hide');
 }

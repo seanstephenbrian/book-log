@@ -10,27 +10,32 @@
 </head>
 <body>
 
-    <div class="form-container hide"><form action="" method="post" class="new-book-form">
-        <div class="form-title">
-            add a new book:
+    <div class="add-book-form-container hide">
+        <div class="add-book-form hide">
+            <form action="" method="post">
+                <div class="form-title">
+                    <p>add a new book:</p>
+                    <img src="img/svg/close.svg" alt="Close the Add Book form" onclick="closeAddBookForm()">
+                </div>
+                <div class="form-element">
+                    <label for="title">title:</label>
+                    <input type="text" name="title" id="title" required></input>
+                </div>
+                <div class="form-element">
+                    <label for="author">author:</label>
+                    <input type="text" name="author" id="author" required></input>
+                </div>
+                <div class="form-element">
+                    <label for="pages"># of pages:</label>
+                    <input type="text" name="pages" id="pages" required></input>
+                </div>
+                <div class="form-element">
+                    <label for="read">read?</label>
+                    <input type="checkbox" name="read" id="read" value="read" required></input>
+                </div>
+            </form>
         </div>
-        <div class="form-element">
-            <label for="title">title:</label>
-            <input type="text" name="title" id="title" required></input>
-        </div>
-        <div class="form-element">
-            <label for="author">author:</label>
-            <input type="text" name="author" id="author" required></input>
-        </div>
-        <div class="form-element">
-            <label for="pages"># of pages:</label>
-            <input type="text" name="pages" id="pages" required></input>
-        </div>
-        <div class="form-element">
-            <label for="read">read?</label>
-            <input type="checkbox" name="read" id="read" value="read" required></input>
-        </div>
-    </form></div>
+    </div>
 
     <div class="main">
         <header>

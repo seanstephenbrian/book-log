@@ -56,11 +56,22 @@ body {
     overflow-x: hidden;
 }
 
-.show {
+.add-book-form-container {
+    font-size: calc(.6*var(--rvv));
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    height: fit-content;
-    width: 400px;
-    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-book-form {
+    position: fixed;
+    max-width: 80vw;
+    z-index: 1;
+    padding: calc(var(--rvv));
+    display: flex;
     justify-content: center;
     align-items: center;
     background-color: blanchedalmond;
@@ -75,8 +86,14 @@ body {
     font-family: 'Thorngumbald';
     font-size: 150%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 15px;
+}
+
+.form-title img {
+    height: calc(var(--rvv));
+    width: calc(var(--rvv));
+    cursor: pointer;
 }
 
 .form-element {
@@ -93,6 +110,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.blur {
+    filter: blur(20px);
 }
 
 header {
@@ -125,6 +146,7 @@ header {
 }
 
 .logged-book {
+    font-size: calc(.2*var(--rvv) + .5rem);
     max-height: 400px;
     max-width: fit-content;
     background-color: #db8283;
