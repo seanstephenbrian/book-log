@@ -89,7 +89,12 @@ function closeAddBookForm() {
 }
 
 const ratingSelector = document.querySelector('#rating');
-ratingSelector.addEventListener('change', () => {
+
+function showRatingSelection() {
     const userRating = document.querySelector('.user-rating');
-    userRating.textContent = ratingSelector.value;
-});
+    userRating.textContent = ratingSelector.value; 
+}
+
+showRatingSelection();
+
+ratingSelector.addEventListener('change', showRatingSelection);

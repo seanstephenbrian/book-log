@@ -103,6 +103,15 @@ body {
     column-gap: 5px;
 }
 
+.rating-slider {
+    display: flex;
+    justify-content: space-between;
+}
+
+#rating {
+    cursor: pointer;
+}
+
 .main {
     position: relative;
     width: 100vw;

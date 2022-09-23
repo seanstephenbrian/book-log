@@ -31,8 +31,10 @@
                 </div>
                 <div class="form-element">
                     <label for="rating">rating:</label>
-                    <input type="range" name="rating" id="rating" min="0" max="5" step="1"></input>
-                    <div><span class="user-rating"></span>/5</div>
+                    <div class="rating-slider">
+                        <input type="range" name="rating" id="rating" min="0" max="5" step="1" value="0"></input>
+                        <div><span class="user-rating"></span>/5</div>
+                    </div>
                 </div>
                 <button type="submit">submit</button>
             </form>
