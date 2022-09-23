@@ -70,11 +70,12 @@ body {
     position: fixed;
     max-width: 80vw;
     z-index: 1;
-    padding: calc(var(--rvv));
+    padding: calc(.5*var(--rvv)) calc(.7*var(--rvv));
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: blanchedalmond;
+    background-color: #c6f6c5;
+    border: 3px solid black;
     border-radius: 15px;
 }
 
@@ -91,25 +92,74 @@ body {
 }
 
 .form-title img {
-    height: calc(var(--rvv));
-    width: calc(var(--rvv));
+    height: calc(1.5*var(--rvv));
+    width: calc(1.5*var(--rvv));
     cursor: pointer;
+    transition: .05s;
+}
+
+.form-title img:hover {
+    transform: scale(1.1);
 }
 
 .form-element {
     display: grid;
     grid-template: 1fr / 1fr 4fr;
     margin: 10px 0;
-    column-gap: 5px;
+    column-gap: calc(.8*var(--rvv));
+}
+
+input[type='text'],
+input[type='number'] {
+    font-family: 'Courier';
+    border: 1px solid black;
+    border-radius: 25px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: #ffffeb;
+}
+
+input[type='text']:valid,
+input[type='number']:valid {
+    background-color: #5fc45e;;
+}
+
+input[type='text']:focus,
+input[type='number']:focus {
+    outline: none;
 }
 
 .rating-slider {
     display: flex;
-    justify-content: space-between;
+    gap: calc(var(--rvv));
 }
 
 #rating {
+    flex: auto;
     cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    font-family: 'Thorngumbald';
+    font-size: calc(.6*var(--rvv));
+    padding: calc(.4*var(--rvv)) calc(.8*var(--rvv));
+    background-color: #ffe4e4;
+    border-radius: calc(var(--rvv));
+    border: 1.5px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .05s;
+}
+
+button:hover {
+    transform: scale(1.2);
 }
 
 .main {
