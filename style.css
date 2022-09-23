@@ -29,9 +29,19 @@ time, mark, audio, video {
     --triadic2: #3e4d66;
 }
 
+@font-face {
+    font-family: 'Sublima';
+    src: url('font/sublima-light/sublima-light.otf');
+}
+
+@font-face {
+    font-family: 'Thorngumbald';
+    src: url('font/thorngumbald/thorngumbald-regular.otf');
+}
+
 html,
 body {
-    font-family: Helvetica, Arial, Helvetica, sans-serif;
+    font-family: 'Sublima', Helvetica, Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -44,22 +54,27 @@ body {
     gap: 20px;
 }
 
-.form-title {
-    font-size: 150%;;
+.show {
     display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
-}
-
-.new-book-form-container {
     height: fit-content;
     width: 400px;
     padding: 10px;
-    display: flex;
     justify-content: center;
     align-items: center;
     background-color: blanchedalmond;
     border-radius: 15px;
+}
+
+.hide {
+    display: none;
+}
+
+.form-title {
+    font-family: 'Thorngumbald';
+    font-size: 150%;;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
 }
 
 .form-element {
@@ -67,6 +82,12 @@ body {
     grid-template: 1fr / 1fr 4fr;
     margin: 10px 0;
     column-gap: 5px;
+}
+
+.log-title {
+    font-family: 'Thorngumbald';
+    font-size: calc(2*var(--rvv));
+    text-align: center;
 }
 
 .library-container {
@@ -77,15 +98,23 @@ body {
 }
 
 .logged-book {
-    color: white;
-    width: calc(5*var(--rvv));
-    background: var(--complementary);
+    max-width: fit-content;
+    background-color: #a2d287;;
     border-radius: 15px;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: calc(.1*var(--rvv));
+    box-shadow: 0 0 calc(.7*var(--rvv)) #7a598e;
+    border: 2.5px solid #556a8f;
 }
 
-.logged-book div {
-    display: flex;
-    justify-content: space-between;
-    gap: 5px;
+.logged-book > div {
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+}
+
+.book-title div:last-child {
+    font-style: italic;
 }
