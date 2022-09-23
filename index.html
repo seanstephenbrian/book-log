@@ -15,24 +15,26 @@
             <form action="" method="post">
                 <div class="form-title">
                     <p>add a new book:</p>
-                    <img src="img/svg/close.svg" alt="Close the Add Book form" onclick="closeAddBookForm()">
+                    <img src="img/svg/close.svg" alt="Close the form" onclick="closeAddBookForm()">
                 </div>
                 <div class="form-element">
                     <label for="title">title:</label>
-                    <input type="text" name="title" id="title" required></input>
+                    <input type="text" name="title" id="title" placeholder="example: Purity" required></input>
                 </div>
                 <div class="form-element">
                     <label for="author">author:</label>
-                    <input type="text" name="author" id="author" required></input>
+                    <input type="text" name="author" id="author" placeholder="example: Jonathan Franzen"required></input>
                 </div>
                 <div class="form-element">
                     <label for="pages"># of pages:</label>
-                    <input type="text" name="pages" id="pages" required></input>
+                    <input type="number" name="pages" id="pages" placeholder="example: 563" required></input>
                 </div>
                 <div class="form-element">
-                    <label for="read">read?</label>
-                    <input type="checkbox" name="read" id="read" value="read" required></input>
+                    <label for="rating">rating:</label>
+                    <input type="range" name="rating" id="rating" min="0" max="5" step="1"></input>
+                    <div><span class="user-rating"></span>/5</div>
                 </div>
+                <button type="submit">submit</button>
             </form>
         </div>
     </div>

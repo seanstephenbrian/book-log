@@ -87,3 +87,9 @@ function closeAddBookForm() {
     const addBookForm = document.querySelector('.add-book-form');
     addBookForm.classList.add('hide');
 }
+
+const ratingSelector = document.querySelector('#rating');
+ratingSelector.addEventListener('change', () => {
+    const userRating = document.querySelector('.user-rating');
+    userRating.textContent = ratingSelector.value;
+});
