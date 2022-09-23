@@ -104,7 +104,7 @@ header {
     background-color: #7bb77a;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid black;
+    border-bottom: 3px solid black;
 }
 
 .log-title {
@@ -125,13 +125,14 @@ header {
 }
 
 .logged-book {
+    max-height: 400px;
     max-width: fit-content;
     background-color: #db8283;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 .logged-book > div {
@@ -144,7 +145,7 @@ header {
 }
 
 .logged-book div div {
-    border-bottom: 1px solid black;
+    border-bottom: 1.5px solid black;
     padding-bottom: calc(.2*var(--rvv));
     align-self: end;
 }
@@ -173,11 +174,24 @@ header {
 }
 
 .book-rating div:last-child {
-    max-width: 60%;
     display: flex;
 }
 
 .book-rating div:last-child img {
     max-width: calc(.5*var(--rvv));
     max-height: calc(.5*var(--rvv));
+}
+
+.add-book {
+    background-color: #f0caca;
+    border: 2px solid black;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-book img {
+    height: calc(2.5*var(--rvv));
+    cursor: pointer;
 }
