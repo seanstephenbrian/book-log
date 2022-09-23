@@ -21,12 +21,13 @@ time, mark, audio, video {
 
 :root {
     --rvv: calc(1rem + 1vh + 1vw);
-    --primary: #4d663e;
-    --complementary: #573e66;
-    --analogous1: #61663e;
-    --analogous2: #3e6643;
-    --triadic1: #3e6657;
-    --triadic2: #3e4d66;
+    --red: #b9595b;
+    --teal: #59b9b7;
+    --pink: #b9598b;
+    --brown: #b98759;
+    --yellow-green: #b9b759;
+    --green: #5bb959;
+    box-sizing: border-box;
 }
 
 @font-face {
@@ -42,16 +43,17 @@ time, mark, audio, video {
 html,
 body {
     font-family: 'Sublima', Helvetica, Arial, Helvetica, sans-serif;
+    width: 100vw;
+    appearance: none;
 }
 
 body {
-    background: rgb(168,217,139);
-    background: linear-gradient(90deg, rgba(168,217,139,0.5018601190476191) 0%, rgba(131,214,182,0.31418504901960786) 35%, rgba(122,152,202,0.3646052170868347) 100%);
+    background-color: #59b9b7;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    overflow-x: hidden;
 }
 
 .show {
@@ -71,7 +73,7 @@ body {
 
 .form-title {
     font-family: 'Thorngumbald';
-    font-size: 150%;;
+    font-size: 150%;
     display: flex;
     justify-content: center;
     margin-bottom: 15px;
@@ -84,37 +86,98 @@ body {
     column-gap: 5px;
 }
 
-.log-title {
-    font-family: 'Thorngumbald';
-    font-size: calc(2*var(--rvv));
-    text-align: center;
+.main {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.library-container {
+header {
+    margin: 0;
+    padding: 0;
     width: 100vw;
+    top: 0;
+    position: sticky;
+    background-color: #7bb77a;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+.log-title {
+    max-width: 50vw;
+    max-height: 100%;
+    font-family: 'Thorngumbald';
+    font-size: calc(1.5*var(--rvv));
+    padding: calc(.2*var(--rvv));
+    padding-left: calc(.8*var(--rvv));
+}
+
+.log-container {
+    max-width: 90vw;
+    margin: calc(.7*var(--rvv));
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    column-gap: 10px;
+    gap: calc(.7*var(--rvv));
 }
 
 .logged-book {
     max-width: fit-content;
-    background-color: #a2d287;;
+    background-color: #db8283;
     border-radius: 15px;
-    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: calc(.1*var(--rvv));
-    box-shadow: 0 0 calc(.7*var(--rvv)) #7a598e;
-    border: 2.5px solid #556a8f;
+    border: 1px solid black;
 }
 
 .logged-book > div {
     display: grid;
-    grid-template: 1fr / 1fr 1fr;
+    grid-template: 1fr / 2fr 3fr;
+}
+
+.logged-book div:first-child {
+    padding-top: calc(.2*var(--rvv));
+}
+
+.logged-book div div {
+    border-bottom: 1px solid black;
+    padding-bottom: calc(.2*var(--rvv));
+    align-self: end;
+}
+
+.logged-book div div:first-child {
+    padding-left: calc(.3*var(--rvv));
+    font-weight: 100;
+}
+
+.logged-book div div:last-child {
+    padding-right: calc(.4*var(--rvv));
+}
+
+.logged-book div:last-child div {
+    border-bottom: none;
+    padding-bottom: calc(.3*var(--rvv));
 }
 
 .book-title div:last-child {
     font-style: italic;
+    font-size: 120%;
+}
+
+.book-rating {
+    max-width: 100%;
+}
+
+.book-rating div:last-child {
+    max-width: 60%;
+    display: flex;
+}
+
+.book-rating div:last-child img {
+    max-width: calc(.5*var(--rvv));
+    max-height: calc(.5*var(--rvv));
 }
