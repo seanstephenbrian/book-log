@@ -98,3 +98,28 @@ function showRatingSelection() {
 showRatingSelection();
 
 ratingSelector.addEventListener('change', showRatingSelection);
+
+const titleInput = document.querySelector('.title-input');
+titleInput.addEventListener('focus', () => {
+    titleInput.removeAttribute('placeholder');
+});
+titleInput.addEventListener('blur', () => {
+    titleInput.setAttribute('placeholder', 'example: Purity');
+});
+
+
+const authorInput = document.querySelector('.author-input');
+authorInput.addEventListener('focus', () => {
+    authorInput.removeAttribute('placeholder');
+});
+authorInput.addEventListener('blur', () => {
+    authorInput.setAttribute('placeholder', 'example: Jonathan Franzen');
+});
+
+const pagesInput = document.querySelector('.pages-input');
+pagesInput.addEventListener('focus', () => {
+    pagesInput.removeAttribute('placeholder');
+});
+pagesInput.addEventListener('blur', () => {
+    pagesInput.setAttribute('placeholder', 'example: 563');
+});
