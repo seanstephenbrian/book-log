@@ -62,8 +62,10 @@ function generateLog(log) {
 
         if (book.read === 'read') {
             loggedBook.classList.add('read-book');
+            readStatus.dataset.status = 'read';
         } else if (book.read === 'want-to-read') {
             loggedBook.classList.add('want-to-read-book');
+            readStatus.dataset.status = 'want-to-read';
         }
 
         const removeBook = loggedBook.appendChild(document.createElement('div'));
@@ -106,6 +108,20 @@ function removeBook(e) {
     generateLog(myLog);
     attachRemoveListeners();
 }
+
+
+
+
+
+
+
+function changeReadStatus(e) {
+// THIS IS WHERE I LEFT OFF
+}
+
+
+
+
 
 function showAddBookForm() {
 
