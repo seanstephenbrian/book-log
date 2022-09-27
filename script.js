@@ -7,7 +7,7 @@ const title = document.querySelector('.log-title');
 title.textContent = `${user}'s book log`;
 
 let myLog = [
-    {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
+    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 5},
     {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
     {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
     {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
@@ -16,10 +16,11 @@ let myLog = [
     {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5}
 ];
 
-function Book(title, author, pages, rating) {
+function Book(title, author, pages, read, rating) {
     this.title = title;
     this.author = author;
     this.pages = pages;
+    this.read = read;
     this.rating = rating;
 }
 
@@ -42,7 +43,6 @@ function generateLog(log) {
         loggedBook.classList.add('logged-book');
         loggedBook.dataset.index = log.indexOf(book);
         const readStatus = loggedBook.appendChild(document.createElement('div'));
-
         readStatus.classList.add('read-status');
         const read = readStatus.appendChild(document.createElement('div'));
         read.classList.add('read');
@@ -52,10 +52,20 @@ function generateLog(log) {
         wantToRead.textContent = 'want to read';
 
         for (property in book) {
+            if (property === 'read') {
+                continue;
+            }
             const bookProperty = loggedBook.appendChild(document.createElement('div'));
             bookProperty.classList.add(`book-${property}`);
             bookProperty.innerHTML = `<div>${property}:</div><div>${book[property]}</div>`;
         };
+
+        if (book.read === 'read') {
+            loggedBook.classList.add('read-book');
+        } else if (book.read === 'want-to-read') {
+            loggedBook.classList.add('want-to-read-book');
+        }
+
         const removeBook = loggedBook.appendChild(document.createElement('div'));
         removeBook.classList.add('remove-book');
         const removeButton = removeBook.appendChild(document.createElement('div'));
@@ -164,9 +174,15 @@ submitForm.addEventListener('submit', (e) => {
     const authorInput = document.querySelector('.author-input');
     const pagesInput = document.querySelector('.pages-input');
     const ratingInput = document.querySelector('.rating-input');
+    let readInput;
+    if (document.getElementById('read').checked) {
+        readInput = 'read';
+    } else if (document.getElementById('want-to-read').checked) {
+        readInput = 'want-to-read';
+    }
     e.preventDefault();
     closeAddBookForm();
-    addNewBook(titleInput.value, authorInput.value, pagesInput.value, parseInt(ratingInput.value));
+    addNewBook(titleInput.value, authorInput.value, pagesInput.value, readInput, parseInt(ratingInput.value));
 });
 
 function closeAddBookForm() {
@@ -178,10 +194,10 @@ function closeAddBookForm() {
     addBookForm.classList.add('hide');
 }
 
-function addNewBook(title, author, pages, rating) {
+function addNewBook(title, author, pages, read, rating) {
     console.log('addNewBook fired');
 
-    let newBook = new Book(title, author, pages, rating);
+    let newBook = new Book(title, author, pages, read, rating);
     myLog.push(newBook);
     const logContainer = document.querySelector('.log-container');
     logContainer.innerHTML = '';

@@ -200,7 +200,7 @@ header {
     max-width: 90vw;
     margin: calc(.7*var(--rvv));
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
     grid-template-rows: minmax(200px, 1fr);
     gap: calc(.7*var(--rvv));
 }
