@@ -7,7 +7,7 @@ const title = document.querySelector('.log-title');
 title.textContent = `${user}'s book log`;
 
 let myLog = [
-    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 5},
+    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5},
     {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
     {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
     {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
