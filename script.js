@@ -52,6 +52,7 @@ function addBookToLog(title, author, pages, rating) {
 function generateLog(log) {
     const logContainer = document.querySelector('.log-container');
     log.forEach(book => {
+        const bookIndex = log.indexOf(book);
         if (book.rating === 1) {
             book.rating = `<img src='img/svg/star.svg' alt='Star icon'>`;
         } else if (book.rating === 2) {
@@ -65,6 +66,7 @@ function generateLog(log) {
         }
         const loggedBook = logContainer.appendChild(document.createElement('div'));
         loggedBook.classList.add('logged-book');
+        loggedBook.dataset.index = bookIndex;
         for (property in book) {
             const bookProperty = loggedBook.appendChild(document.createElement('div'));
             bookProperty.classList.add(`book-${property}`);
@@ -74,7 +76,8 @@ function generateLog(log) {
         removeBook.classList.add('remove-book');
         const removeButton = removeBook.appendChild(document.createElement('div'));
         removeButton.classList.add('remove-button');
-        removeButton.textContent = 'remove book';
+        removeButton.dataset.index = bookIndex;
+        removeButton.textContent = `remove book`;
     });
     const addBook = logContainer.appendChild(document.createElement('div'));
     addBook.classList.add('add-book');
@@ -82,6 +85,33 @@ function generateLog(log) {
 }
 
 generateLog(myLog);
+
+function attachRemoveListeners() {
+    const removeButtons = document.querySelectorAll('.remove-button');
+    removeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            removeBook(e);
+        });
+    });
+}
+
+attachRemoveListeners();
+
+function removeBook(e) {
+    const clickedButton = e.target;
+    const removeIndex = clickedButton.getAttribute('data-index');
+    const allBooks = document.querySelectorAll('.logged-book');
+    allBooks.forEach(book => {
+        const bookIndex = book.getAttribute('data-index');
+        if (removeIndex === bookIndex) {
+            myLog.splice(removeIndex, 1);
+        }
+    });
+    const logContainer = document.querySelector('.log-container');
+    logContainer.innerHTML = '';
+    generateLog(myLog);
+    attachRemoveListeners();
+}
 
 function showAddBookForm() {
     const mainSection = document.querySelector('.main');
@@ -119,7 +149,6 @@ titleInput.addEventListener('focus', () => {
 titleInput.addEventListener('blur', () => {
     titleInput.setAttribute('placeholder', 'example: Purity');
 });
-
 
 const authorInput = document.querySelector('.author-input');
 authorInput.addEventListener('focus', () => {
