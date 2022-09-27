@@ -12,7 +12,7 @@
 
     <div class="add-book-form-container hide">
         <div class="add-book-form hide">
-            <form action="" method="post">
+            <form class="form-itself" action="" method="post">
                 <div class="form-title">
                     <p>add a new book:</p>
                     <img src="img/svg/close.svg" alt="Close the form" onclick="closeAddBookForm()">
@@ -32,12 +32,12 @@
                 <div class="form-element">
                     <label for="rating">rating:</label>
                     <div class="rating-slider">
-                        <input type="range" name="rating" id="rating" min="0" max="5" step="1" value="0"></input>
+                        <input type="range" class="rating-input" name="rating" id="rating" min="0" max="5" step="1" value="0"></input>
                         <div><span class="user-rating"></span>/5</div>
                     </div>
                 </div>
                 <div class="button-container">
-                    <button type="submit">submit</button>
+                    <button class="submit-button" type="submit">submit</button>
                 </div>
             </form>
         </div>

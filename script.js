@@ -6,36 +6,7 @@ const title = document.querySelector('.log-title');
 
 title.textContent = `${user}'s book log`;
 
-let myLog = [
-    {title: '1984', author: 'George Orwell', pages: 328, rating: 2},
-    {title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', pages: 208, rating: 1},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194, rating: 3},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194, rating: 5},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194, rating: 4},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194},
-    {title: 'Mrs Dalloway', author: 'Virginia Woolf', pages: 194}
-];
+let myLog = [];
 
 function Book(title, author, pages, rating) {
     this.title = title;
@@ -44,15 +15,10 @@ function Book(title, author, pages, rating) {
     this.rating = rating;
 }
 
-function addBookToLog(title, author, pages, rating) {
-    let newBook = new Book(title, author, pages, rating);
-    myLog.push(newBook);
-}
-
 function generateLog(log) {
+    console.log('generateLog fired');
     const logContainer = document.querySelector('.log-container');
     log.forEach(book => {
-        const bookIndex = log.indexOf(book);
         if (book.rating === 1) {
             book.rating = `<img src='img/svg/star.svg' alt='Star icon'>`;
         } else if (book.rating === 2) {
@@ -66,7 +32,7 @@ function generateLog(log) {
         }
         const loggedBook = logContainer.appendChild(document.createElement('div'));
         loggedBook.classList.add('logged-book');
-        loggedBook.dataset.index = bookIndex;
+        loggedBook.dataset.index = log.indexOf(book);
         for (property in book) {
             const bookProperty = loggedBook.appendChild(document.createElement('div'));
             bookProperty.classList.add(`book-${property}`);
@@ -76,7 +42,7 @@ function generateLog(log) {
         removeBook.classList.add('remove-book');
         const removeButton = removeBook.appendChild(document.createElement('div'));
         removeButton.classList.add('remove-button');
-        removeButton.dataset.index = bookIndex;
+        removeButton.dataset.index = log.indexOf(book);
         removeButton.textContent = `remove book`;
     });
     const addBook = logContainer.appendChild(document.createElement('div'));
@@ -114,13 +80,76 @@ function removeBook(e) {
 }
 
 function showAddBookForm() {
+
+    // reveal the form & blur the background:
+
     const mainSection = document.querySelector('.main');
     mainSection.classList.add('blur');
     const addBookFormContainer = document.querySelector('.add-book-form-container');
     addBookFormContainer.classList.remove('hide');
     const addBookForm = document.querySelector('.add-book-form');
     addBookForm.classList.remove('hide');
+
+    // show the user their rating selection value, and automatically hide/refill the placeholder values
+    // when form input fields lose or gain focus
+
+    const titleInput = document.querySelector('.title-input');
+    titleInput.value = '';
+    titleInput.addEventListener('focus', () => {
+        titleInput.removeAttribute('placeholder');
+    });
+    titleInput.addEventListener('blur', () => {
+        titleInput.setAttribute('placeholder', 'example: Purity');
+    });
+
+    const authorInput = document.querySelector('.author-input');
+    authorInput.value = '';
+    authorInput.addEventListener('focus', () => {
+        authorInput.removeAttribute('placeholder');
+    });
+    authorInput.addEventListener('blur', () => {
+        authorInput.setAttribute('placeholder', 'example: Jonathan Franzen');
+    });
+
+    const pagesInput = document.querySelector('.pages-input');
+    pagesInput.value = '';
+    pagesInput.addEventListener('focus', () => {
+        pagesInput.removeAttribute('placeholder');
+    });
+
+    pagesInput.addEventListener('blur', () => {
+        pagesInput.setAttribute('placeholder', 'example: 563');
+    });
+
+    const ratingInput = document.querySelector('.rating-input');
+
+    const ratingSelector = document.querySelector('#rating');
+    ratingSelector.value = '';
+
+    function showRatingSelection() {
+        const userRating = document.querySelector('.user-rating');
+        userRating.textContent = ratingSelector.value; 
+    }
+
+    showRatingSelection();
+
+    ratingSelector.addEventListener('change', showRatingSelection);
+
 }
+
+// add a new book to the log when the user clicks submit
+
+const submitForm = document.querySelector('.form-itself');
+
+submitForm.addEventListener('submit', (e) => {
+    const titleInput = document.querySelector('.title-input');
+    const authorInput = document.querySelector('.author-input');
+    const pagesInput = document.querySelector('.pages-input');
+    const ratingInput = document.querySelector('.rating-input');
+    e.preventDefault();
+    closeAddBookForm();
+    addNewBook(titleInput.value, authorInput.value, pagesInput.value, parseInt(ratingInput.value));
+});
 
 function closeAddBookForm() {
     const mainSection = document.querySelector('.main');
@@ -131,37 +160,14 @@ function closeAddBookForm() {
     addBookForm.classList.add('hide');
 }
 
-const ratingSelector = document.querySelector('#rating');
+function addNewBook(title, author, pages, rating) {
+    console.log('addNewBook fired');
 
-function showRatingSelection() {
-    const userRating = document.querySelector('.user-rating');
-    userRating.textContent = ratingSelector.value; 
+    let newBook = new Book(title, author, pages, rating);
+    myLog.push(newBook);
+    const logContainer = document.querySelector('.log-container');
+    logContainer.innerHTML = '';
+    generateLog(myLog);
+    attachRemoveListeners();
 }
 
-showRatingSelection();
-
-ratingSelector.addEventListener('change', showRatingSelection);
-
-const titleInput = document.querySelector('.title-input');
-titleInput.addEventListener('focus', () => {
-    titleInput.removeAttribute('placeholder');
-});
-titleInput.addEventListener('blur', () => {
-    titleInput.setAttribute('placeholder', 'example: Purity');
-});
-
-const authorInput = document.querySelector('.author-input');
-authorInput.addEventListener('focus', () => {
-    authorInput.removeAttribute('placeholder');
-});
-authorInput.addEventListener('blur', () => {
-    authorInput.setAttribute('placeholder', 'example: Jonathan Franzen');
-});
-
-const pagesInput = document.querySelector('.pages-input');
-pagesInput.addEventListener('focus', () => {
-    pagesInput.removeAttribute('placeholder');
-});
-pagesInput.addEventListener('blur', () => {
-    pagesInput.setAttribute('placeholder', 'example: 563');
-});

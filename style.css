@@ -237,6 +237,7 @@ header {
 }
 
 .logged-book div div:last-child {
+    padding-left: calc(.15*var(--rvv));
     padding-right: calc(.4*var(--rvv));
 }
 
