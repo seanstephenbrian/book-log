@@ -1,3 +1,11 @@
+// set custom title
+
+const user = 'hannah';
+
+const title = document.querySelector('.log-title');
+
+title.textContent = `${user}'s book log`;
+
 let myLog = [
     {title: '1984', author: 'George Orwell', pages: 328, rating: 2},
     {title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', pages: 208, rating: 1},
@@ -62,6 +70,11 @@ function generateLog(log) {
             bookProperty.classList.add(`book-${property}`);
             bookProperty.innerHTML = `<div>${property}:</div><div>${book[property]}</div>`;
         };
+        const removeBook = loggedBook.appendChild(document.createElement('div'));
+        removeBook.classList.add('remove-book');
+        const removeButton = removeBook.appendChild(document.createElement('div'));
+        removeButton.classList.add('remove-button');
+        removeButton.textContent = 'remove book';
     });
     const addBook = logContainer.appendChild(document.createElement('div'));
     addBook.classList.add('add-book');

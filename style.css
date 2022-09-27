@@ -159,7 +159,7 @@ button {
 }
 
 button:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 .main {
@@ -216,7 +216,7 @@ header {
     border: 2px solid black;
 }
 
-.logged-book > div {
+.logged-book > div:not(div:last-child) {
     display: grid;
     grid-template: 1fr / 2fr 3fr;
 }
@@ -241,8 +241,7 @@ header {
 }
 
 .logged-book div:last-child div {
-    border-bottom: none;
-    padding-bottom: calc(.3*var(--rvv));
+    padding: calc(.3*var(--rvv));
 }
 
 .book-title div:last-child {
@@ -261,6 +260,30 @@ header {
 .book-rating div:last-child img {
     max-width: calc(.5*var(--rvv));
     max-height: calc(.5*var(--rvv));
+}
+
+.remove-book {
+    padding: calc(.3*var(--rvv));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.remove-button {
+    font-family: 'Thorngumbald';
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: calc(var(--rvv));
+    border: 1px solid black;
+    background-color: #c74e50;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.remove-button:hover {
+    transform: scale(1.05);
 }
 
 .add-book {
