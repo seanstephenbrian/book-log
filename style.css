@@ -200,11 +200,13 @@ header {
     max-width: 90vw;
     margin: calc(.7*var(--rvv));
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-rows: minmax(200px, 1fr);
     gap: calc(.7*var(--rvv));
 }
 
 .logged-book {
+    position: relative;
     font-size: calc(.2*var(--rvv) + .5rem);
     max-height: 400px;
     max-width: fit-content;
@@ -216,17 +218,52 @@ header {
     border: 2px solid black;
 }
 
+.book-title,
+.book-author,
+.book-pages,
+.book-rating {
+    border-bottom: 1.5px solid black;
+}
+
+.read-status {
+    padding-top: calc(0.2*var(--rvv));
+    margin: 0 calc(0.1*var(--rvv));
+    display: flex !important;
+    justify-content: center;
+    gap: calc(0.6*var(--rvv));
+}
+
+.read,
+.want-to-read {
+    display: flex !important;
+    margin: 0;
+    padding: calc(0.1*var(--rvv)) !important;
+    border: 1px solid black;
+    border-radius: calc(0.075*var(--rvv));
+    cursor: pointer;
+    font-size: calc(0.1*var(--rvv) + 0.5rem);
+    transition: 0.1s;
+}
+
+.read:hover,
+.want-to-read:hover {
+    transform: scale(1.1);
+}
+
+.read {
+    background-color: #a9d7a8;
+}
+
+.want-to-read {
+    background-color: #f7cbcc;
+}
+
 .logged-book > div:not(div:last-child) {
     display: grid;
     grid-template: 1fr / 2fr 3fr;
 }
 
-.logged-book div:first-child {
-    padding-top: calc(.2*var(--rvv));
-}
-
 .logged-book div div {
-    border-bottom: 1.5px solid black;
     padding-bottom: calc(.2*var(--rvv));
     align-self: end;
 }
@@ -245,6 +282,10 @@ header {
     padding: calc(.3*var(--rvv));
 }
 
+.book-title {
+    padding-top: calc(0.1*var(--rvv));
+}
+
 .book-title div:last-child {
     font-style: italic;
     font-size: 120%;
@@ -255,12 +296,15 @@ header {
 }
 
 .book-rating div:last-child {
+    height: calc(0.7*var(--rvv));
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .book-rating div:last-child img {
-    max-width: calc(.5*var(--rvv));
-    max-height: calc(.5*var(--rvv));
+    max-width: calc(.4*var(--rvv));
+    max-height: calc(.4*var(--rvv));
 }
 
 .remove-book {
@@ -271,6 +315,7 @@ header {
 }
 
 .remove-button {
+    text-align: center;
     font-family: 'Thorngumbald';
     height: 50%;
     display: flex;
@@ -297,6 +342,6 @@ header {
 }
 
 .add-book img {
-    height: calc(2.5*var(--rvv));
+    height: calc(3.5rem + var(--rvv));
     cursor: pointer;
 }

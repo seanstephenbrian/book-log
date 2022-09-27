@@ -6,7 +6,15 @@ const title = document.querySelector('.log-title');
 
 title.textContent = `${user}'s book log`;
 
-let myLog = [];
+let myLog = [
+    {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
+    {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
+    {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
+    {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
+    {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
+    {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
+    {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5}
+];
 
 function Book(title, author, pages, rating) {
     this.title = title;
@@ -33,6 +41,16 @@ function generateLog(log) {
         const loggedBook = logContainer.appendChild(document.createElement('div'));
         loggedBook.classList.add('logged-book');
         loggedBook.dataset.index = log.indexOf(book);
+        const readStatus = loggedBook.appendChild(document.createElement('div'));
+
+        readStatus.classList.add('read-status');
+        const read = readStatus.appendChild(document.createElement('div'));
+        read.classList.add('read');
+        read.textContent = 'read';
+        const wantToRead = readStatus.appendChild(document.createElement('div'));
+        wantToRead.classList.add('want-to-read');
+        wantToRead.textContent = 'want to read';
+
         for (property in book) {
             const bookProperty = loggedBook.appendChild(document.createElement('div'));
             bookProperty.classList.add(`book-${property}`);
@@ -90,8 +108,8 @@ function showAddBookForm() {
     const addBookForm = document.querySelector('.add-book-form');
     addBookForm.classList.remove('hide');
 
-    // show the user their rating selection value, and automatically hide/refill the placeholder values
-    // when form input fields lose or gain focus
+    // automatically hide/refill the placeholder values when form input fields lose or gain focus,
+    // and show the user their rating selection value
 
     const titleInput = document.querySelector('.title-input');
     titleInput.value = '';
