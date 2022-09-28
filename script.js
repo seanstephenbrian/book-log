@@ -25,7 +25,6 @@ function Book(title, author, pages, read, rating) {
 }
 
 function generateLog(log) {
-    console.log('generateLog fired');
     const logContainer = document.querySelector('.log-container');
     log.forEach(book => {
         if (book.rating === 1) {
@@ -125,17 +124,23 @@ function changeReadStatus(e) {
     const clickedButton = e.target;
     const readStatusDiv = clickedButton.parentNode;
     const clickedBook = readStatusDiv.parentNode;
+    const bookIndex = clickedBook.getAttribute('data-index');
     const clickedButtonClass = clickedButton.getAttribute('class');
 
     if (clickedButtonClass === 'read-button') {
-        readStatusDiv.dataset.status = 'read';
-        clickedBook.classList.remove('want-to-read-book');
-        clickedBook.classList.add('read-book');
+        // readStatusDiv.dataset.status = 'read';
+        // clickedBook.classList.remove('want-to-read-book');
+        // clickedBook.classList.add('read-book');
+        myLog[bookIndex].read = 'read';
     } else if (clickedButtonClass === 'want-to-read-button') {
-        readStatusDiv.dataset.status = 'want-to-read';
-        clickedBook.classList.remove('read-book');
-        clickedBook.classList.add('want-to-read-book');
-    } 
+        // readStatusDiv.dataset.status = 'want-to-read';
+        // clickedBook.classList.remove('read-book');
+        // clickedBook.classList.add('want-to-read-book');
+        myLog[bookIndex].read = 'want-to-read';
+    }
+    const logContainer = document.querySelector('.log-container');
+    logContainer.innerHTML = '';
+    generateLog(myLog);
 }
 
 function showAddBookForm() {
@@ -226,8 +231,6 @@ function closeAddBookForm() {
 }
 
 function addNewBook(title, author, pages, read, rating) {
-    console.log('addNewBook fired');
-
     let newBook = new Book(title, author, pages, read, rating);
     myLog.push(newBook);
     const logContainer = document.querySelector('.log-container');
