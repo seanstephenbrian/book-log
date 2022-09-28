@@ -10,11 +10,11 @@ title.textContent = 'your book log';
 
 let myLog = [
     {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5},
+    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 3},
+    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 0},
+    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 2},
     {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 5},
-    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 5},
-    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5},
-    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 5},
-    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5},
+    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 4},
     {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5}
 ];
 
@@ -39,6 +39,8 @@ function generateLog(log) {
             book.rating = `<img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'>`;
         } else if (book.rating === 5) {
             book.rating = `<img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'>`;
+        } else if (book.rating === 0 | book.rating === '') {
+            delete book.rating;
         }
         const loggedBook = logContainer.appendChild(document.createElement('div'));
         loggedBook.classList.add('logged-book');
@@ -268,7 +270,11 @@ function closeAddBookForm() {
 }
 
 function addNewBook(title, author, pages, read, rating) {
-    let newBook = new Book(title, author, pages, read, rating);
+    let filteredRating = rating;
+    if (read === 'want-to-read') {
+        filteredRating = '';
+    }
+    let newBook = new Book(title, author, pages, read, filteredRating);
     myLog.push(newBook);
     const logContainer = document.querySelector('.log-container');
     logContainer.innerHTML = '';
