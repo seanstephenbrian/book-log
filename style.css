@@ -121,12 +121,38 @@ input[type='number'] {
 
 input[type='text']:valid,
 input[type='number']:valid {
-    background-color: #5fc45e;;
+    background-color: #5fc45e;
 }
 
 input[type='text']:focus,
 input[type='number']:focus {
     outline: none;
+}
+
+fieldset {
+    display: flex;
+    justify-content: center;
+}
+
+.radio-container {
+    display: flex;
+    justify-content: center;
+    gap: calc(.6*var(--rvv));
+}
+
+.radio-container div {
+    padding: calc(.5*var(--rvv));
+    border: 1.5px solid black;
+    border-radius: 50px;
+    background-color: #ffffeb;
+}
+
+.read-option.checked {
+    background-color: #97d896;
+}
+
+.want-to-read-option.checked {
+    background-color: #ffadad;
 }
 
 .rating-slider {

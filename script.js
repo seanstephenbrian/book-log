@@ -200,21 +200,38 @@ function showAddBookForm() {
         pagesInput.setAttribute('placeholder', 'example: 563');
     });
 
-    const ratingInput = document.querySelector('.rating-input');
-
-    const ratingSelector = document.querySelector('#rating');
-    ratingSelector.value = '';
-
-    function showRatingSelection() {
-        const userRating = document.querySelector('.user-rating');
-        userRating.textContent = ratingSelector.value; 
-    }
-
-    showRatingSelection();
-
-    ratingSelector.addEventListener('change', showRatingSelection);
-
 }
+
+
+function styleRadioOptions() {
+    const radioInputs = document.querySelectorAll('.radio-input');
+    radioInputs.forEach(input => {
+        if (input.checked) {
+            const radioOption = input.parentNode;
+            radioOption.classList.add('checked');
+        } else if (!input.checked) {
+            const radioOption = input.parentNode;
+            radioOption.classList.remove('checked');
+        }
+    });
+}
+
+styleRadioOptions();
+
+const radioInputs = document.querySelectorAll('.radio-input');
+
+radioInputs.forEach(input => {
+    input.addEventListener('click', styleRadioOptions);
+});
+
+function showRatingSelection() {
+    const userRating = document.querySelector('.user-rating');
+    userRating.textContent = ratingSelector.value; 
+}
+const ratingSelector = document.querySelector('#rating');
+showRatingSelection();
+ratingSelector.addEventListener('change', showRatingSelection);
+
 
 // add a new book to the log when the user clicks submit
 

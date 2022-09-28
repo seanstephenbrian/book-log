@@ -30,21 +30,22 @@
                 </div>
 
                 <fieldset>
-                    <legend>have you read it?</legend>
-                    <div>
-                        <input type="radio" id="read" name="read" value="read" checked>
-                        <label for="read">read</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="want-to-read" name="read" value="want-to-read">
-                        <label for="want-to-read">want to read</label>
+                    <div class="radio-container">
+                        <div class="radio-option read-option">
+                            <input class="radio-input" type="radio" id="read" name="read" value="read" checked required>
+                            <label for="read">read</label>
+                        </div>
+                        <div class="radio-option want-to-read-option">
+                            <input class="radio-input" type="radio" id="want-to-read" name="read" value="want-to-read" required>
+                            <label for="want-to-read">want to read</label>
+                        </div>
                     </div>
                 </fieldset>
 
                 <div class="form-element">
                     <label for="rating">rating:</label>
                     <div class="rating-slider">
-                        <input type="range" class="rating-input" name="rating" id="rating" min="0" max="5" step="1" value="0"></input>
+                        <input type="range" class="rating-input" name="rating" id="rating" min="0" max="5" step="1"></input>
                         <div><span class="user-rating"></span>/5</div>
                     </div>
                 </div>
