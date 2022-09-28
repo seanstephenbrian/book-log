@@ -176,6 +176,7 @@ button:hover {
 }
 
 header {
+    z-index: 2;
     margin: 0;
     padding: 0;
     width: 100vw;
@@ -241,8 +242,8 @@ header {
     gap: calc(0.6*var(--rvv));
 }
 
-.read,
-.want-to-read {
+.read-button,
+.want-to-read-button {
     display: flex !important;
     margin: 0;
     padding: calc(0.1*var(--rvv)) !important;
@@ -253,16 +254,16 @@ header {
     transition: 0.1s;
 }
 
-.read:hover,
-.want-to-read:hover {
+.read-button:hover,
+.want-to-read-button:hover {
     transform: scale(1.1);
 }
 
-.read {
+.read-button {
     background-color: #a9d7a8;
 }
 
-.want-to-read {
+.want-to-read-button {
     background-color: #f7cbcc;
 }
 

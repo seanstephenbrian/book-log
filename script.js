@@ -45,10 +45,10 @@ function generateLog(log) {
         const readStatus = loggedBook.appendChild(document.createElement('div'));
         readStatus.classList.add('read-status');
         const read = readStatus.appendChild(document.createElement('div'));
-        read.classList.add('read');
+        read.classList.add('read-button');
         read.textContent = 'read';
         const wantToRead = readStatus.appendChild(document.createElement('div'));
-        wantToRead.classList.add('want-to-read');
+        wantToRead.classList.add('want-to-read-button');
         wantToRead.textContent = 'want to read';
 
         for (property in book) {
@@ -78,9 +78,9 @@ function generateLog(log) {
     const addBook = logContainer.appendChild(document.createElement('div'));
     addBook.classList.add('add-book');
     addBook.innerHTML = `<img src='img/svg/add.svg' alt='Add a new book' onclick='showAddBookForm()'>`;
+    attachRemoveListeners();
+    attachReadStatusListeners();
 }
-
-generateLog(myLog);
 
 function attachRemoveListeners() {
     const removeButtons = document.querySelectorAll('.remove-button');
@@ -90,8 +90,6 @@ function attachRemoveListeners() {
         });
     });
 }
-
-attachRemoveListeners();
 
 function removeBook(e) {
     const clickedButton = e.target;
@@ -106,22 +104,39 @@ function removeBook(e) {
     const logContainer = document.querySelector('.log-container');
     logContainer.innerHTML = '';
     generateLog(myLog);
-    attachRemoveListeners();
 }
 
-
-
-
-
-
+function attachReadStatusListeners() {
+    const readButtons = document.querySelectorAll('.read-button');
+    readButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            changeReadStatus(e);
+        });
+    });
+    const wantToReadButtons = document.querySelectorAll('.want-to-read-button');
+    wantToReadButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            changeReadStatus(e);
+        });
+    });
+}
 
 function changeReadStatus(e) {
-// THIS IS WHERE I LEFT OFF
+    const clickedButton = e.target;
+    const readStatusDiv = clickedButton.parentNode;
+    const clickedBook = readStatusDiv.parentNode;
+    const clickedButtonClass = clickedButton.getAttribute('class');
+
+    if (clickedButtonClass === 'read-button') {
+        readStatusDiv.dataset.status = 'read';
+        clickedBook.classList.remove('want-to-read-book');
+        clickedBook.classList.add('read-book');
+    } else if (clickedButtonClass === 'want-to-read-button') {
+        readStatusDiv.dataset.status = 'want-to-read';
+        clickedBook.classList.remove('read-book');
+        clickedBook.classList.add('want-to-read-book');
+    } 
 }
-
-
-
-
 
 function showAddBookForm() {
 
@@ -221,3 +236,4 @@ function addNewBook(title, author, pages, read, rating) {
     attachRemoveListeners();
 }
 
+generateLog(myLog);
