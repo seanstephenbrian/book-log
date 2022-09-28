@@ -1,12 +1,12 @@
-// set custom title
+const user = '';
 
-const user = 'hannah';
-
-const readingGoal = 30;
+const readingGoal = 10;
 
 const title = document.querySelector('.log-title');
 
-title.textContent = `${user}'s book log`;
+// title.textContent = `${user}'s book log`;
+
+title.textContent = 'your book log';
 
 let myLog = [
     {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5},
@@ -143,14 +143,8 @@ function changeReadStatus(e) {
     const clickedButtonClass = clickedButton.getAttribute('class');
 
     if (clickedButtonClass === 'read-button') {
-        // readStatusDiv.dataset.status = 'read';
-        // clickedBook.classList.remove('want-to-read-book');
-        // clickedBook.classList.add('read-book');
         myLog[bookIndex].read = 'read';
     } else if (clickedButtonClass === 'want-to-read-button') {
-        // readStatusDiv.dataset.status = 'want-to-read';
-        // clickedBook.classList.remove('read-book');
-        // clickedBook.classList.add('want-to-read-book');
         myLog[bookIndex].read = 'want-to-read';
     }
     const logContainer = document.querySelector('.log-container');
@@ -175,7 +169,6 @@ function showAddBookForm() {
     addBookForm.classList.remove('hide');
 
     // automatically hide/refill the placeholder values when form input fields lose or gain focus,
-    // and show the user their rating selection value
 
     const titleInput = document.querySelector('.title-input');
     titleInput.value = '';

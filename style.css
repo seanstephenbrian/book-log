@@ -243,7 +243,7 @@ header {
 .progress-message {
     z-index: 5;
     max-width: 30vw;
-    font-size: calc(.7*var(--rvv));
+    font-size: calc(.5*var(--rvv));
     position: absolute;
     right: calc(.8*var(--rvv));
 }
