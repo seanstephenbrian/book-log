@@ -2,6 +2,8 @@
 
 const user = 'hannah';
 
+const readingGoal = 3;
+
 const title = document.querySelector('.log-title');
 
 title.textContent = `${user}'s book log`;
@@ -79,6 +81,19 @@ function generateLog(log) {
     addBook.innerHTML = `<img src='img/svg/add.svg' alt='Add a new book' onclick='showAddBookForm()'>`;
     attachRemoveListeners();
     attachReadStatusListeners();
+    generateProgressBar();
+}
+
+function generateProgressBar() {
+    const readBooks = parseInt(document.querySelectorAll('.read-book').length);
+    const progressBar = document.querySelector('.progress-bar');
+    const progressMessage = document.querySelector('.progress-message');
+    const percentageRead = parseInt(readBooks / readingGoal * 100);
+    if (percentageRead > 100) {
+        percentageRead = 100;
+    }
+    progressBar.setAttribute('style', `width: ${percentageRead}%`);
+    progressMessage.textContent = `${percentageRead}% of the way to your goal of ${readingGoal} books`;
 }
 
 function attachRemoveListeners() {
