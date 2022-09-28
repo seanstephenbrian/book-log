@@ -2,7 +2,7 @@
 
 const user = 'hannah';
 
-const readingGoal = 3;
+const readingGoal = 30;
 
 const title = document.querySelector('.log-title');
 
@@ -10,12 +10,12 @@ title.textContent = `${user}'s book log`;
 
 let myLog = [
     {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5},
-    {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
-    {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
-    {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
-    {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
-    {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5},
-    {title: 'Book Title', author: 'Book Author', pages: 500, rating: 5}
+    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 5},
+    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 5},
+    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5},
+    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 5},
+    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5},
+    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5}
 ];
 
 function Book(title, author, pages, read, rating) {
@@ -160,6 +160,11 @@ function changeReadStatus(e) {
 
 function showAddBookForm() {
 
+    document.getElementById('read').checked = true;
+    styleRadioOptions();
+
+    showRatingInput();
+
     // reveal the form & blur the background:
 
     const mainSection = document.querySelector('.main');
@@ -195,13 +200,20 @@ function showAddBookForm() {
     pagesInput.addEventListener('focus', () => {
         pagesInput.removeAttribute('placeholder');
     });
-
     pagesInput.addEventListener('blur', () => {
         pagesInput.setAttribute('placeholder', 'example: 563');
     });
-
 }
 
+function removeRatingInput() {
+    const ratingSection = document.querySelector('.rating-section');
+    ratingSection.classList.add('hide');
+}
+
+function showRatingInput() {
+    const ratingSection = document.querySelector('.rating-section');
+    ratingSection.classList.remove('hide');
+}
 
 function styleRadioOptions() {
     const radioInputs = document.querySelectorAll('.radio-input');

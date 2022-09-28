@@ -31,21 +31,21 @@
 
                 <fieldset>
                     <div class="radio-container">
-                        <div class="radio-option read-option">
+                        <div class="radio-option read-option" onclick="showRatingInput()">
                             <input class="radio-input" type="radio" id="read" name="read" value="read" checked required>
                             <label for="read">read</label>
                         </div>
-                        <div class="radio-option want-to-read-option">
+                        <div class="radio-option want-to-read-option" onclick="removeRatingInput()">
                             <input class="radio-input" type="radio" id="want-to-read" name="read" value="want-to-read" required>
                             <label for="want-to-read">want to read</label>
                         </div>
                     </div>
                 </fieldset>
 
-                <div class="form-element">
+                <div class="form-element rating-section">
                     <label for="rating">rating:</label>
                     <div class="rating-slider">
-                        <input type="range" class="rating-input" name="rating" id="rating" min="0" max="5" step="1"></input>
+                        <input type="range" class="rating-input" name="rating" id="rating" min="0" max="5" step="1" value="0"></input>
                         <div><span class="user-rating"></span>/5</div>
                     </div>
                 </div>
