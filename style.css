@@ -341,7 +341,7 @@ div[data-status='want-to-read'] .want-to-read-button {
     align-items: center;
     border-radius: calc(var(--rvv));
     border: 1px solid black;
-    background-color: #fffd9c;
+    background-color: #fffd9cb6;
     cursor: pointer;
     transition: 0.1s;
 }
