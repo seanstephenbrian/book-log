@@ -142,14 +142,15 @@ fieldset {
 }
 
 .radio-container div {
-    padding: calc(.5*var(--rvv));
+    font-size: 90%;
+    padding: calc(.3*var(--rvv));
     border: 1.5px solid black;
     border-radius: 50px;
     background-color: #ffffeb;
 }
 
 .read-option.checked {
-    background-color: #17c5c5;
+    background-color: #7eca7d;
 }
 
 .want-to-read-option.checked {
@@ -173,10 +174,12 @@ fieldset {
 }
 
 button {
+    color: black;
+    text-decoration: none;
     font-family: 'Thorngumbald';
     font-size: calc(.6*var(--rvv));
     padding: calc(.4*var(--rvv)) calc(.8*var(--rvv));
-    background-color: #7eca7d;
+    background-color: #17c5c5;
     border-radius: calc(var(--rvv));
     border: 1.5px solid black;
     display: flex;
