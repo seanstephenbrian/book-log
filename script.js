@@ -1,285 +1,301 @@
-const user = '';
+(function main() {
 
-const readingGoal = 10;
+    const user = '';
 
-const title = document.querySelector('.log-title');
+    const readingGoal = 10;
 
-// title.textContent = `${user}'s book log`;
+    const title = document.querySelector('.log-title');
 
-title.textContent = 'your book log';
+    // title.textContent = `${user}'s book log`;
 
-let myLog = [
-    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5},
-    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 3},
-    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 0},
-    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 2},
-    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 5},
-    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 4},
-    {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5}
-];
+    title.textContent = 'your book log';
 
-function Book(title, author, pages, read, rating) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.rating = rating;
-}
+    let myLog = [
+        {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5},
+        {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 3},
+        {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 0},
+        {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 2},
+        {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 5},
+        {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 4},
+        {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5}
+    ];
 
-function generateLog(log) {
-    const logContainer = document.querySelector('.log-container');
-    log.forEach(book => {
-        if (book.rating === 1) {
-            book.rating = `<img src='img/svg/star.svg' alt='Star icon'>`;
-        } else if (book.rating === 2) {
-            book.rating = `<img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'>`;
-        } else if (book.rating === 3) {
-            book.rating = `<img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'>`;
-        } else if (book.rating === 4) {
-            book.rating = `<img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'>`;
-        } else if (book.rating === 5) {
-            book.rating = `<img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'>`;
-        } else if (book.rating === 0 | book.rating === '') {
-            delete book.rating;
+    // initial constructor syntax:
+    // function Book(title, author, pages, read, rating) {
+    //     this.title = title;
+    //     this.author = author;
+    //     this.pages = pages;
+    //     this.read = read;
+    //     this.rating = rating;
+    // }
+
+    // new class syntax for book object creation:
+    class Book {
+        constructor(title, author, pages, read, rating) {
+            this.title = title;
+            this.author = author;
+            this.pages = pages;
+            this.read = read;
+            this.rating = rating;
         }
-        const loggedBook = logContainer.appendChild(document.createElement('div'));
-        loggedBook.classList.add('logged-book');
-        loggedBook.dataset.index = log.indexOf(book);
-        const readStatus = loggedBook.appendChild(document.createElement('div'));
-        readStatus.classList.add('read-status');
-        const read = readStatus.appendChild(document.createElement('div'));
-        read.classList.add('read-button');
-        read.textContent = 'read';
-        const wantToRead = readStatus.appendChild(document.createElement('div'));
-        wantToRead.classList.add('want-to-read-button');
-        wantToRead.textContent = 'want to read';
+    }
 
-        for (property in book) {
-            if (property === 'read') {
-                continue;
+    function generateLog(log) {
+        const logContainer = document.querySelector('.log-container');
+        log.forEach(book => {
+            if (book.rating === 1) {
+                book.rating = `<img src='img/svg/star.svg' alt='Star icon'>`;
+            } else if (book.rating === 2) {
+                book.rating = `<img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'>`;
+            } else if (book.rating === 3) {
+                book.rating = `<img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'>`;
+            } else if (book.rating === 4) {
+                book.rating = `<img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'>`;
+            } else if (book.rating === 5) {
+                book.rating = `<img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'><img src='img/svg/star.svg' alt='Star icon'>`;
+            } else if (book.rating === 0 | book.rating === '') {
+                delete book.rating;
             }
-            const bookProperty = loggedBook.appendChild(document.createElement('div'));
-            bookProperty.classList.add(`book-${property}`);
-            bookProperty.innerHTML = `<div>${property}:</div><div>${book[property]}</div>`;
-        };
+            const loggedBook = logContainer.appendChild(document.createElement('div'));
+            loggedBook.classList.add('logged-book');
+            loggedBook.dataset.index = log.indexOf(book);
+            const readStatus = loggedBook.appendChild(document.createElement('div'));
+            readStatus.classList.add('read-status');
+            const read = readStatus.appendChild(document.createElement('div'));
+            read.classList.add('read-button');
+            read.textContent = 'read';
+            const wantToRead = readStatus.appendChild(document.createElement('div'));
+            wantToRead.classList.add('want-to-read-button');
+            wantToRead.textContent = 'want to read';
 
-        if (book.read === 'read') {
-            loggedBook.classList.add('read-book');
-            readStatus.dataset.status = 'read';
-        } else if (book.read === 'want-to-read') {
-            loggedBook.classList.add('want-to-read-book');
-            readStatus.dataset.status = 'want-to-read';
-        }
+            for (property in book) {
+                if (property === 'read') {
+                    continue;
+                }
+                const bookProperty = loggedBook.appendChild(document.createElement('div'));
+                bookProperty.classList.add(`book-${property}`);
+                bookProperty.innerHTML = `<div>${property}:</div><div>${book[property]}</div>`;
+            };
 
-        const removeBook = loggedBook.appendChild(document.createElement('div'));
-        removeBook.classList.add('remove-book');
-        const removeButton = removeBook.appendChild(document.createElement('div'));
-        removeButton.classList.add('remove-button');
-        removeButton.dataset.index = log.indexOf(book);
-        removeButton.textContent = `remove book`;
-    });
-    const addBook = logContainer.appendChild(document.createElement('div'));
-    addBook.classList.add('add-book');
-    addBook.innerHTML = `<img src='img/svg/add.svg' alt='Add a new book' onclick='showAddBookForm()'>`;
-    attachRemoveListeners();
-    attachReadStatusListeners();
-    generateProgressBar();
-}
+            if (book.read === 'read') {
+                loggedBook.classList.add('read-book');
+                readStatus.dataset.status = 'read';
+            } else if (book.read === 'want-to-read') {
+                loggedBook.classList.add('want-to-read-book');
+                readStatus.dataset.status = 'want-to-read';
+            }
 
-function generateProgressBar() {
-    const readBooks = parseInt(document.querySelectorAll('.read-book').length);
-    const progressBar = document.querySelector('.progress-bar');
-    const progressMessage = document.querySelector('.progress-message');
-    const percentageRead = parseInt(readBooks / readingGoal * 100);
-    if (percentageRead > 100) {
-        percentageRead = 100;
+            const removeBook = loggedBook.appendChild(document.createElement('div'));
+            removeBook.classList.add('remove-book');
+            const removeButton = removeBook.appendChild(document.createElement('div'));
+            removeButton.classList.add('remove-button');
+            removeButton.dataset.index = log.indexOf(book);
+            removeButton.textContent = `remove book`;
+        });
+        const addBook = logContainer.appendChild(document.createElement('div'));
+        addBook.classList.add('add-book');
+        addBook.innerHTML = `<img src='img/svg/add.svg' alt='Add a new book' onclick='showAddBookForm()'>`;
+        attachRemoveListeners();
+        attachReadStatusListeners();
+        generateProgressBar();
     }
-    progressBar.setAttribute('style', `width: ${percentageRead}%`);
-    progressMessage.textContent = `${percentageRead}% of the way to your goal of ${readingGoal} books`;
-}
 
-function attachRemoveListeners() {
-    const removeButtons = document.querySelectorAll('.remove-button');
-    removeButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            removeBook(e);
-        });
-    });
-}
-
-function removeBook(e) {
-    const clickedButton = e.target;
-    const removeIndex = clickedButton.getAttribute('data-index');
-    const allBooks = document.querySelectorAll('.logged-book');
-    allBooks.forEach(book => {
-        const bookIndex = book.getAttribute('data-index');
-        if (removeIndex === bookIndex) {
-            myLog.splice(removeIndex, 1);
+    function generateProgressBar() {
+        const readBooks = parseInt(document.querySelectorAll('.read-book').length);
+        const progressBar = document.querySelector('.progress-bar');
+        const progressMessage = document.querySelector('.progress-message');
+        const percentageRead = parseInt(readBooks / readingGoal * 100);
+        if (percentageRead > 100) {
+            percentageRead = 100;
         }
-    });
-    const logContainer = document.querySelector('.log-container');
-    logContainer.innerHTML = '';
-    generateLog(myLog);
-}
-
-function attachReadStatusListeners() {
-    const readButtons = document.querySelectorAll('.read-button');
-    readButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            changeReadStatus(e);
-        });
-    });
-    const wantToReadButtons = document.querySelectorAll('.want-to-read-button');
-    wantToReadButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            changeReadStatus(e);
-        });
-    });
-}
-
-function changeReadStatus(e) {
-    const clickedButton = e.target;
-    const readStatusDiv = clickedButton.parentNode;
-    const clickedBook = readStatusDiv.parentNode;
-    const bookIndex = clickedBook.getAttribute('data-index');
-    const clickedButtonClass = clickedButton.getAttribute('class');
-
-    if (clickedButtonClass === 'read-button') {
-        myLog[bookIndex].read = 'read';
-    } else if (clickedButtonClass === 'want-to-read-button') {
-        myLog[bookIndex].read = 'want-to-read';
+        progressBar.setAttribute('style', `width: ${percentageRead}%`);
+        progressMessage.textContent = `${percentageRead}% of the way to your goal of ${readingGoal} books`;
     }
-    const logContainer = document.querySelector('.log-container');
-    logContainer.innerHTML = '';
-    generateLog(myLog);
-}
 
-function showAddBookForm() {
+    function attachRemoveListeners() {
+        const removeButtons = document.querySelectorAll('.remove-button');
+        removeButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                removeBook(e);
+            });
+        });
+    }
 
-    document.getElementById('read').checked = true;
+    function removeBook(e) {
+        const clickedButton = e.target;
+        const removeIndex = clickedButton.getAttribute('data-index');
+        const allBooks = document.querySelectorAll('.logged-book');
+        allBooks.forEach(book => {
+            const bookIndex = book.getAttribute('data-index');
+            if (removeIndex === bookIndex) {
+                myLog.splice(removeIndex, 1);
+            }
+        });
+        const logContainer = document.querySelector('.log-container');
+        logContainer.innerHTML = '';
+        generateLog(myLog);
+    }
+
+    function attachReadStatusListeners() {
+        const readButtons = document.querySelectorAll('.read-button');
+        readButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                changeReadStatus(e);
+            });
+        });
+        const wantToReadButtons = document.querySelectorAll('.want-to-read-button');
+        wantToReadButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                changeReadStatus(e);
+            });
+        });
+    }
+
+    function changeReadStatus(e) {
+        const clickedButton = e.target;
+        const readStatusDiv = clickedButton.parentNode;
+        const clickedBook = readStatusDiv.parentNode;
+        const bookIndex = clickedBook.getAttribute('data-index');
+        const clickedButtonClass = clickedButton.getAttribute('class');
+
+        if (clickedButtonClass === 'read-button') {
+            myLog[bookIndex].read = 'read';
+        } else if (clickedButtonClass === 'want-to-read-button') {
+            myLog[bookIndex].read = 'want-to-read';
+        }
+        const logContainer = document.querySelector('.log-container');
+        logContainer.innerHTML = '';
+        generateLog(myLog);
+    }
+
+    function showAddBookForm() {
+
+        document.getElementById('read').checked = true;
+        styleRadioOptions();
+
+        showRatingInput();
+
+        // reveal the form & blur the background:
+
+        const mainSection = document.querySelector('.main');
+        mainSection.classList.add('blur');
+        const addBookFormContainer = document.querySelector('.add-book-form-container');
+        addBookFormContainer.classList.remove('hide');
+        const addBookForm = document.querySelector('.add-book-form');
+        addBookForm.classList.remove('hide');
+
+        // automatically hide/refill the placeholder values when form input fields lose or gain focus,
+
+        const titleInput = document.querySelector('.title-input');
+        titleInput.value = '';
+        titleInput.addEventListener('focus', () => {
+            titleInput.removeAttribute('placeholder');
+        });
+        titleInput.addEventListener('blur', () => {
+            titleInput.setAttribute('placeholder', 'example: Purity');
+        });
+
+        const authorInput = document.querySelector('.author-input');
+        authorInput.value = '';
+        authorInput.addEventListener('focus', () => {
+            authorInput.removeAttribute('placeholder');
+        });
+        authorInput.addEventListener('blur', () => {
+            authorInput.setAttribute('placeholder', 'example: Jonathan Franzen');
+        });
+
+        const pagesInput = document.querySelector('.pages-input');
+        pagesInput.value = '';
+        pagesInput.addEventListener('focus', () => {
+            pagesInput.removeAttribute('placeholder');
+        });
+        pagesInput.addEventListener('blur', () => {
+            pagesInput.setAttribute('placeholder', 'example: 563');
+        });
+    }
+
+    function removeRatingInput() {
+        const ratingSection = document.querySelector('.rating-section');
+        ratingSection.classList.add('hide');
+    }
+
+    function showRatingInput() {
+        const ratingSection = document.querySelector('.rating-section');
+        ratingSection.classList.remove('hide');
+    }
+
+    function styleRadioOptions() {
+        const radioInputs = document.querySelectorAll('.radio-input');
+        radioInputs.forEach(input => {
+            if (input.checked) {
+                const radioOption = input.parentNode;
+                radioOption.classList.add('checked');
+            } else if (!input.checked) {
+                const radioOption = input.parentNode;
+                radioOption.classList.remove('checked');
+            }
+        });
+    }
+
     styleRadioOptions();
 
-    showRatingInput();
-
-    // reveal the form & blur the background:
-
-    const mainSection = document.querySelector('.main');
-    mainSection.classList.add('blur');
-    const addBookFormContainer = document.querySelector('.add-book-form-container');
-    addBookFormContainer.classList.remove('hide');
-    const addBookForm = document.querySelector('.add-book-form');
-    addBookForm.classList.remove('hide');
-
-    // automatically hide/refill the placeholder values when form input fields lose or gain focus,
-
-    const titleInput = document.querySelector('.title-input');
-    titleInput.value = '';
-    titleInput.addEventListener('focus', () => {
-        titleInput.removeAttribute('placeholder');
-    });
-    titleInput.addEventListener('blur', () => {
-        titleInput.setAttribute('placeholder', 'example: Purity');
-    });
-
-    const authorInput = document.querySelector('.author-input');
-    authorInput.value = '';
-    authorInput.addEventListener('focus', () => {
-        authorInput.removeAttribute('placeholder');
-    });
-    authorInput.addEventListener('blur', () => {
-        authorInput.setAttribute('placeholder', 'example: Jonathan Franzen');
-    });
-
-    const pagesInput = document.querySelector('.pages-input');
-    pagesInput.value = '';
-    pagesInput.addEventListener('focus', () => {
-        pagesInput.removeAttribute('placeholder');
-    });
-    pagesInput.addEventListener('blur', () => {
-        pagesInput.setAttribute('placeholder', 'example: 563');
-    });
-}
-
-function removeRatingInput() {
-    const ratingSection = document.querySelector('.rating-section');
-    ratingSection.classList.add('hide');
-}
-
-function showRatingInput() {
-    const ratingSection = document.querySelector('.rating-section');
-    ratingSection.classList.remove('hide');
-}
-
-function styleRadioOptions() {
     const radioInputs = document.querySelectorAll('.radio-input');
+
     radioInputs.forEach(input => {
-        if (input.checked) {
-            const radioOption = input.parentNode;
-            radioOption.classList.add('checked');
-        } else if (!input.checked) {
-            const radioOption = input.parentNode;
-            radioOption.classList.remove('checked');
-        }
+        input.addEventListener('click', styleRadioOptions);
     });
-}
 
-styleRadioOptions();
-
-const radioInputs = document.querySelectorAll('.radio-input');
-
-radioInputs.forEach(input => {
-    input.addEventListener('click', styleRadioOptions);
-});
-
-function showRatingSelection() {
-    const userRating = document.querySelector('.user-rating');
-    userRating.textContent = ratingSelector.value; 
-}
-const ratingSelector = document.querySelector('#rating');
-showRatingSelection();
-ratingSelector.addEventListener('change', showRatingSelection);
-
-
-// add a new book to the log when the user clicks submit
-
-const submitForm = document.querySelector('.form-itself');
-
-submitForm.addEventListener('submit', (e) => {
-    const titleInput = document.querySelector('.title-input');
-    const authorInput = document.querySelector('.author-input');
-    const pagesInput = document.querySelector('.pages-input');
-    const ratingInput = document.querySelector('.rating-input');
-    let readInput;
-    if (document.getElementById('read').checked) {
-        readInput = 'read';
-    } else if (document.getElementById('want-to-read').checked) {
-        readInput = 'want-to-read';
+    function showRatingSelection() {
+        const userRating = document.querySelector('.user-rating');
+        userRating.textContent = ratingSelector.value; 
     }
-    e.preventDefault();
-    closeAddBookForm();
-    addNewBook(titleInput.value, authorInput.value, pagesInput.value, readInput, parseInt(ratingInput.value));
-});
+    const ratingSelector = document.querySelector('#rating');
+    showRatingSelection();
+    ratingSelector.addEventListener('change', showRatingSelection);
 
-function closeAddBookForm() {
-    const mainSection = document.querySelector('.main');
-    mainSection.classList.remove('blur');
-    const addBookFormContainer = document.querySelector('.add-book-form-container');
-    addBookFormContainer.classList.add('hide');
-    const addBookForm = document.querySelector('.add-book-form');
-    addBookForm.classList.add('hide');
-}
 
-function addNewBook(title, author, pages, read, rating) {
-    let filteredRating = rating;
-    if (read === 'want-to-read') {
-        filteredRating = '';
+    // add a new book to the log when the user clicks submit
+
+    const submitForm = document.querySelector('.form-itself');
+
+    submitForm.addEventListener('submit', (e) => {
+        const titleInput = document.querySelector('.title-input');
+        const authorInput = document.querySelector('.author-input');
+        const pagesInput = document.querySelector('.pages-input');
+        const ratingInput = document.querySelector('.rating-input');
+        let readInput;
+        if (document.getElementById('read').checked) {
+            readInput = 'read';
+        } else if (document.getElementById('want-to-read').checked) {
+            readInput = 'want-to-read';
+        }
+        e.preventDefault();
+        closeAddBookForm();
+        addNewBook(titleInput.value, authorInput.value, pagesInput.value, readInput, parseInt(ratingInput.value));
+    });
+
+    function closeAddBookForm() {
+        const mainSection = document.querySelector('.main');
+        mainSection.classList.remove('blur');
+        const addBookFormContainer = document.querySelector('.add-book-form-container');
+        addBookFormContainer.classList.add('hide');
+        const addBookForm = document.querySelector('.add-book-form');
+        addBookForm.classList.add('hide');
     }
-    let newBook = new Book(title, author, pages, read, filteredRating);
-    myLog.push(newBook);
-    const logContainer = document.querySelector('.log-container');
-    logContainer.innerHTML = '';
+
+    function addNewBook(title, author, pages, read, rating) {
+        let filteredRating = rating;
+        if (read === 'want-to-read') {
+            filteredRating = '';
+        }
+        let newBook = new Book(title, author, pages, read, filteredRating);
+        myLog.push(newBook);
+        const logContainer = document.querySelector('.log-container');
+        logContainer.innerHTML = '';
+        generateLog(myLog);
+        attachRemoveListeners();
+    }
+
     generateLog(myLog);
-    attachRemoveListeners();
-}
 
-generateLog(myLog);
+})();
