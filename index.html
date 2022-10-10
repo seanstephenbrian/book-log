@@ -9,12 +9,15 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+    <div class="welcome-alert">
+
+    </div>
     <div class="add-book-form-container hide">
         <div class="add-book-form hide">
             <form class="form-itself" action="" method="post">
                 <div class="form-title">
                     <p>add a new book:</p>
-                    <img src="img/svg/close.svg" alt="Close the form" onclick="closeAddBookForm()">
+                    <img src="img/svg/close.svg" class="close-form-button" alt="Close the form">
                 </div>
                 <div class="form-element">
                     <label for="title">title:</label>
@@ -31,11 +34,11 @@
 
                 <fieldset>
                     <div class="radio-container">
-                        <div class="radio-option read-option" onclick="showRatingInput()">
+                        <div class="radio-option read-option">
                             <input class="radio-input" type="radio" id="read" name="read" value="read" checked required>
                             <label for="read">read</label>
                         </div>
-                        <div class="radio-option want-to-read-option" onclick="removeRatingInput()">
+                        <div class="radio-option want-to-read-option">
                             <input class="radio-input" type="radio" id="want-to-read" name="read" value="want-to-read" required>
                             <label for="want-to-read">want to read</label>
                         </div>
