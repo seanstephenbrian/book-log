@@ -124,7 +124,6 @@
             }
             let newBook = new Book(title, author, pages, read, filteredRating);
             myLog.push(newBook);
-            const logContainer = document.querySelector('.log-container');
             generateLog();
         }
 
@@ -250,7 +249,7 @@
 
         function attachFormListeners() {
 
-            // automatically hide/refill the placeholder values when form input fields lose or gain focus:
+            // automatically hide/refill the placeholder values when form input fields gain or lose focus:
             const titleInput = document.querySelector('.title-input');
             titleInput.value = '';
             titleInput.addEventListener('focus', () => {
