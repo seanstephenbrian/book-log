@@ -3,18 +3,24 @@
     // module for creating/updating the book log itself:
     const Log = (function() {
 
-        // create log with placeholder content:
-        let myLog = [
-            {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5},
-            {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 3},
-            {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 0},
-            {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 2},
-            {title: 'Book Title', author: 'Book Author', pages: 500, read: 'want-to-read', rating: 5},
-            {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 4},
-            {title: 'Book Title', author: 'Book Author', pages: 500, read: 'read', rating: 5}
-        ];
+        // create empty log array:
+        let myLog = [];
 
-        // initial constructor syntax:
+        // get stored log if it exists:
+        const retrieveStoredLog = () => {
+            if (localStorage.getItem('myLog')) {
+                myLog = JSON.parse(localStorage.getItem('myLog'));
+            }
+        }
+        retrieveStoredLog();
+
+        // set up method for saving log to storage:
+        const saveLog = () => {
+            localStorage.setItem('myLog', JSON.stringify(myLog));
+        }
+
+        // initial constructor syntax from before class refactor:
+
         // function Book(title, author, pages, read, rating) {
         //     this.title = title;
         //     this.author = author;
@@ -116,7 +122,7 @@
 
         };
 
-        // function to add a book to the log and then re-render the log:
+        // function to add a book to the log, save the new log to storage, and then re-render the log display:
         function addNewBook(title, author, pages, read, rating) {
             let filteredRating = rating;
             if (read === 'want-to-read') {
@@ -124,10 +130,11 @@
             }
             let newBook = new Book(title, author, pages, read, filteredRating);
             myLog.push(newBook);
+            saveLog();
             generateLog();
         }
 
-        // function to remove a book from the log object and re-render the log display:
+        // function to remove a book from the log object, save the new log to storage, and then re-render the log display:
         function removeBook(e) {
             const clickedButton = e.target;
             const removeIndex = clickedButton.getAttribute('data-index');
@@ -138,10 +145,11 @@
                     myLog.splice(removeIndex, 1);
                 }
             });
+            saveLog();
             generateLog();
         }
 
-        // function to change read status of a book in the log and then re-render the log:
+        // function to change read status of a book in the log, save the new log to storage, and then re-render the log:
         function changeReadStatus(e) {
             const clickedButton = e.target;
             const readStatusDiv = clickedButton.parentNode;
@@ -154,7 +162,7 @@
             } else if (clickedButtonClass === 'want-to-read-button') {
                 myLog[bookIndex].read = 'want-to-read';
             }
-
+            saveLog();
             generateLog();
         }
 
@@ -168,17 +176,28 @@
     })();
 
 
-
-    // module for dynamic/ongoing page effects:
+    // module for everything page-related:
     const Page = (function() {
 
-        // set user's name and reading goal; this info will be collected with a pop-up window:
-        const user = 'your';
+        // establish empty variables for user's name and reading goal:
+        let user;
 
-        const readingGoal = 10;
+        // method to set and save user's name:
+        const setUser = (name) => {
+            user = name;
+            localStorage.setItem('user', user);
+        }
 
+        let readingGoal;
 
-        const showWelcomeForm = () => {
+        // method to set and save user's reading goal:
+        const setReadingGoal = (goal) => {
+            readingGoal = goal;
+            localStorage.setItem('readingGoal', readingGoal);
+        }
+
+        // render a welcome pop-up to gather user's name and reading goal:
+        const showWelcomeWindow = () => {
 
             // create welcome message <div>:
             const welcomeWindow = document.createElement('div');
@@ -250,21 +269,44 @@
                         submitButton.textContent = 'submit';
                         buttonContainer.appendChild(submitButton);
 
+                // add event listener for form submission:
+                welcomeForm.addEventListener('submit', submitWelcomeForm);
+
             // blur the background:
             const mainSection = document.querySelector('.main');
             mainSection.classList.add('blur');
         }
 
-        showWelcomeForm();
+        // set user and readingGoal variables based on input from the submitted form:
+        const submitWelcomeForm = (e) => {
+            e.preventDefault;
+            const nameInput = document.querySelector('.name-input').value;
+            setUser(nameInput);
+            const goalInput = document.querySelector('.goal-input').value;
+            setReadingGoal(goalInput);
+            renderPageTitle();
+            generateProgressBar();
+            hideWelcomeWindow();
+        }
 
+        // remove the welcome window from the document:
+        const hideWelcomeWindow = () => {
+            // delete window:
+            const welcomeWindow = document.querySelector('.welcome-window');
+            welcomeWindow.remove();
+
+            // un-blur the background:
+            const mainSection = document.querySelector('.main');
+            mainSection.classList.remove('blur');
+        }
 
         // set the page title with the user's name:
-        const title = document.querySelector('.log-title');
-
-        // title.textContent = `${user}'s book log`;
-
-        title.textContent = 'your book log';
-
+        const renderPageTitle = () => {
+            const title = document.querySelector('.log-title');
+            title.textContent = `${user}'s book log`;
+        }
+        
+        // generate progress bar with user's reading goal:
         function generateProgressBar() {
             const readBooks = parseInt(document.querySelectorAll('.read-book').length);
             const progressBar = document.querySelector('.progress-bar');
@@ -275,6 +317,16 @@
             }
             progressBar.setAttribute('style', `width: ${percentageRead}%`);
             progressMessage.textContent = `${percentageRead}% of the way to your goal of ${readingGoal} books`;
+        }
+
+        // check if user & readingGoal are saved in localStorage; if not, show the welcome pop-up:
+        if (localStorage.getItem('user')) {
+            user = localStorage.getItem('user');
+            readingGoal = localStorage.getItem('readingGoal');
+            renderPageTitle();
+            generateProgressBar();
+        } else if (!localStorage.getItem('user')) {
+            showWelcomeWindow();
         }
 
         function attachLogListeners() {
