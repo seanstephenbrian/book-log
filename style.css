@@ -207,12 +207,12 @@ button:hover {
 }
 
 header {
+    height: calc(3.5*var(--rvv));
     z-index: 2;
     margin: 0;
     padding: 0;
     width: 100vw;
     top: 0;
-    position: sticky;
     background-color: #59b9b7;
     display: flex;
     justify-content: space-between;
@@ -223,9 +223,10 @@ header {
     width: 40vw;
     max-height: 100%;
     font-family: 'Thorngumbald';
-    font-size: calc(1.5*var(--rvv));
-    padding: calc(.2*var(--rvv));
-    padding-left: calc(.8*var(--rvv));
+    font-size: calc(0.7*var(--rvv));
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .progress-bar-container {
@@ -255,7 +256,7 @@ header {
     max-width: 90vw;
     margin: calc(.7*var(--rvv));
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     grid-template-rows: minmax(200px, 1fr);
     gap: calc(.7*var(--rvv));
 }
@@ -318,7 +319,6 @@ header {
     background-color: #b3e3b3;
 }
 
-
 div[data-status='want-to-read'] .want-to-read-button,
 div[data-status='read'] .read-button  {
     box-shadow: calc(0.07*var(--rvv)) calc(0.07*var(--rvv)) #833738;
@@ -331,6 +331,7 @@ div[data-status='read'] .read-button  {
 .logged-book > div:not(div:last-child) {
     display: grid;
     grid-template: 1fr / 2fr 3fr;
+    column-gap: calc(0.4*var(--rvv));
 }
 
 .logged-book div div {
@@ -420,4 +421,11 @@ div[data-status='read'] .read-button  {
 
 .add-book img:hover {
     transform: scale(1.1);
+}
+
+
+@media only screen and (min-width: 750px) {
+    .log-title {
+        font-size: calc(1.2*var(--rvv));
+    }
 }
