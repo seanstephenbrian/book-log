@@ -377,7 +377,7 @@
 
             // change the message:
             const welcomeMessage = document.querySelector('.welcome-message');
-            welcomeMessage.textContent = 'edit your name and reading goal below:';
+            welcomeMessage.textContent = 'edit your name / reading goal below:';
             welcomeMessage.classList.add('edit-form-title');
 
             // load the user's name into the name input field:
@@ -394,6 +394,9 @@
             closeFormButton.setAttribute('src', 'img/svg/close.svg');
             closeFormButton.setAttribute('alt', 'Close the form');
             welcomeMessage.appendChild(closeFormButton);
+
+            // add a click listener to the close button:
+            closeFormButton.addEventListener('click', hideWelcomeWindow);
 
         }
 

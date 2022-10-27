@@ -385,8 +385,8 @@ header {
 .logged-book {
     position: relative;
     font-size: calc(.2*var(--rvv) + .5rem);
-    max-height: 400px;
-    max-width: fit-content;
+    max-height: none;
+    max-width: none;
     background-color: #db8283;
     border-radius: 15px;
     display: flex;
@@ -416,7 +416,7 @@ header {
     margin: 0 calc(0.1*var(--rvv));
     display: flex !important;
     justify-content: center;
-    gap: calc(0.6*var(--rvv));
+    gap: calc(0.8*var(--rvv)) !important;
 }
 
 .read-button,
@@ -430,8 +430,6 @@ header {
     font-size: calc(0.1*var(--rvv) + 0.5rem);
     transition: 0.1s;
 }
-
-
 
 .read-button {
     background-color: #b3e3b3;
@@ -449,7 +447,6 @@ div[data-status='read'] .read-button  {
 .logged-book > div:not(div:last-child) {
     display: grid;
     grid-template: 1fr / 2fr 3fr;
-    column-gap: calc(0.4*var(--rvv));
 }
 
 .logged-book div div {
