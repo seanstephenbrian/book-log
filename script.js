@@ -108,11 +108,11 @@
             addBook.innerHTML = `<img src='img/svg/add.svg' alt='Add a new book'>`;
             // attach click listener to the add book card which reveals the add book form:
             addBook.addEventListener('click', () => {
-                PageEffects.showAddBookForm();
+                Page.showAddBookForm();
             });
             // attach click listeners to the new log and generate the header progress bar:
-            PageEffects.attachLogListeners();
-            PageEffects.generateProgressBar();
+            Page.attachLogListeners();
+            Page.generateProgressBar();
 
         };
 
@@ -170,12 +170,93 @@
 
 
     // module for dynamic/ongoing page effects:
-    const PageEffects = (function() {
+    const Page = (function() {
 
         // set user's name and reading goal; this info will be collected with a pop-up window:
         const user = 'your';
 
         const readingGoal = 10;
+
+
+        const showWelcomeForm = () => {
+
+            // create welcome message <div>:
+            const welcomeWindow = document.createElement('div');
+            welcomeWindow.classList.add('welcome-window');
+            document.body.appendChild(welcomeWindow);
+
+                // add welcome message before form:
+                const welcomeMessage = document.createElement('div');
+                welcomeMessage.classList.add('welcome-message');
+                welcomeMessage.textContent = 'hello! please provide your name and annual reading goal.';
+                welcomeWindow.appendChild(welcomeMessage);
+
+                // create welcome form to gather user's name and reading goal:
+                const welcomeForm = document.createElement('form');
+                welcomeForm.classList.add('welcome-form');
+                welcomeForm.setAttribute('action', '');
+                welcomeForm.setAttribute('method', 'post');
+                welcomeWindow.appendChild(welcomeForm);
+
+                    // create name section:
+                    const nameSection = document.createElement('div');
+                    nameSection.classList.add('name-section');
+                    welcomeForm.appendChild(nameSection);
+
+                        // create name label & input:
+                        const nameLabel = document.createElement('label');
+                        nameLabel.classList.add('name-label');
+                        nameLabel.setAttribute('for', 'name');
+                        nameLabel.textContent = 'name:'
+                        nameSection.appendChild(nameLabel);
+
+                        const nameInput = document.createElement('input');
+                        nameInput.classList.add('name-input');
+                        nameInput.setAttribute('type', 'text');
+                        nameInput.setAttribute('name', 'name');
+                        nameInput.setAttribute('id', 'name');
+                        nameInput.setAttribute('placeholder', 'example: Helen');
+                        nameInput.setAttribute('required', '');
+                        nameSection.appendChild(nameInput);
+
+                    // create reading goal section:
+                    const goalSection = document.createElement('div');
+                    goalSection.classList.add('goal-section');
+                    welcomeForm.appendChild(goalSection);
+
+                        // create name label & input:
+                        const goalLabel = document.createElement('label');
+                        goalLabel.classList.add('goal-label');
+                        goalLabel.setAttribute('for', 'goal');
+                        goalLabel.textContent = 'how many books do you want to read this year?';
+                        goalSection.appendChild(goalLabel);
+
+                        const goalInput = document.createElement('input');
+                        goalInput.classList.add('goal-input');
+                        goalInput.setAttribute('type', 'number');
+                        goalInput.setAttribute('name', 'goal');
+                        goalInput.setAttribute('id', 'goal');
+                        goalInput.setAttribute('placeholder', 'example: 15');
+                        goalSection.appendChild(goalInput);
+
+                    // create submit button:
+                    const buttonContainer = document.createElement('div');
+                    buttonContainer.classList.add('welcome-form-button-container');
+                    welcomeForm.appendChild(buttonContainer);
+
+                        const submitButton = document.createElement('button');
+                        submitButton.classList.add('welcome-form-button');
+                        submitButton.setAttribute('type', 'submit');
+                        submitButton.textContent = 'submit';
+                        buttonContainer.appendChild(submitButton);
+
+            // blur the background:
+            const mainSection = document.querySelector('.main');
+            mainSection.classList.add('blur');
+        }
+
+        showWelcomeForm();
+
 
         // set the page title with the user's name:
         const title = document.querySelector('.log-title');
@@ -364,6 +445,6 @@
     })();
 
     Log.generateLog();
-    PageEffects.attachFormListeners();
+    Page.attachFormListeners();
 
 })();

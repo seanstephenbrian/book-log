@@ -57,6 +57,73 @@ body {
     overflow-x: hidden;
 }
 
+.welcome-window {
+    position: fixed;
+    width: calc(10*var(--rvv));
+    max-width: 80vw;
+    z-index: 1;
+    background-color: #c6f6c5;
+    border: 2px solid black;
+    border-radius: 15px;
+    display: grid;
+    font-family: 'Thorngumbald';
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: calc(0.5*var(--rvv));    
+}
+
+.welcome-message {
+    font-size: calc(0.6*var(--rvv));
+}
+
+.welcome-form {
+    margin-top: calc(0.4*var(--rvv));
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--rvv));
+}
+
+.name-section,
+.goal-section {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr;
+    column-gap: calc(0.1*var(--rvv));
+    align-items: center;
+}
+
+.name-label {
+    position: relative;
+}
+
+.name-label::after {
+    position: relative;
+    top: calc(0.6*var(--rvv));
+    right: calc(1.2*var(--rvv));
+    font-size: calc(0.4*var(--rvv));
+    font-style: italic;
+    content: 'required'
+}
+
+.welcome-form input {
+    height: calc(var(--rvv));
+    max-height: calc(var(--rvv));
+}
+
+.welcome-form-button-container {
+    margin-top: calc(-0.5*var(--rvv));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-form-button {
+    height: calc(1.5*var(--rvv));
+}
+
+
 .add-book-form-container {
     font-size: calc(.6*var(--rvv));
     position: absolute;
@@ -117,6 +184,10 @@ input[type='number'] {
     border-radius: 25px;
     padding-left: 1rem;
     padding-right: 1rem;
+    background-color: #ffffeb;
+}
+
+input[type='number']:valid:optional {
     background-color: #ffffeb;
 }
 
