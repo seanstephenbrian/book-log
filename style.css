@@ -166,10 +166,6 @@ body {
     transition: .05s;
 }
 
-.form-title img:hover {
-    transform: scale(1.1);
-}
-
 .form-element {
     display: grid;
     grid-template: 1fr / 1fr 4fr;
@@ -260,9 +256,7 @@ button {
     transition: .05s;
 }
 
-button:hover {
-    transform: scale(1.1);
-}
+
 
 .main {
     position: relative;
@@ -291,19 +285,63 @@ header {
 }
 
 .log-title {
-    width: 40vw;
+    height: calc(3.5*var(--rvv));
+    position: relative;
+    width: fit-content;
     max-height: 100%;
     font-family: 'Thorngumbald';
     font-size: calc(0.7*var(--rvv));
     display: flex;
-    justify-content: center;
+    margin: 0 calc(.8*var(--rvv));
     align-items: center;
 }
 
+.edit-name {
+    position: absolute;
+    font-size: calc(0.35*(var(--rvv)));
+    text-decoration: underline;
+    bottom: 0;
+    right: calc(-0.7*var(--rvv));
+    cursor: pointer;
+}
+
+.edit-window {
+    margin: 0;
+    padding: 0;
+    width: calc(13*var(--rvv));
+    max-width: 95vw;
+    padding-bottom: calc(0.6*var(--rvv));
+}
+
+.edit-window .welcome-message {
+    margin: calc(0.5*var(--rvv));
+}
+
+.edit-window .welcome-form {
+    margin: 0 calc(0.5*var(--rvv));
+}
+
+.edit-form-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.close-edit-form-button {
+    cursor: pointer;
+    width: calc(1.2*var(--rvv));
+    height: calc(1.2*var(--rvv));
+    transition: 0.1s linear;
+}
+
+.edit-window label {
+    font-size: calc(0.5*var(--rvv));
+}
+
 .progress-bar-container {
+    position: relative;
+    flex: auto;
     border-left: 3px solid black;
     background-color: #b9595b;
-    width: 60vw;
     display: flex;
     align-items: center;
 }
@@ -322,6 +360,18 @@ header {
     position: absolute;
     right: calc(.8*var(--rvv));
 }
+
+.edit-goal {
+    position: absolute;
+    font-size: calc(0.35*(var(--rvv)));
+    text-decoration: underline;
+    text-decoration: ;
+    bottom: 0;
+    right: calc(0.15*var(--rvv));
+    cursor: pointer;
+}
+
+
 
 .log-container {
     max-width: 90vw;
@@ -381,10 +431,7 @@ header {
     transition: 0.1s;
 }
 
-.read-button:hover,
-.want-to-read-button:hover {
-    transform: scale(1.1);
-}
+
 
 .read-button {
     background-color: #b3e3b3;
@@ -471,9 +518,6 @@ div[data-status='read'] .read-button  {
     transition: 0.1s;
 }
 
-.remove-button:hover {
-    transform: scale(1.05);
-}
 
 .add-book {
     background-color: #f0caca;
@@ -490,13 +534,40 @@ div[data-status='read'] .read-button  {
     cursor: pointer;
 }
 
-.add-book img:hover {
-    transform: scale(1.1);
+
+
+
+@media only screen and (max-width: 750px) {
+    .log-title {
+        max-width: 20vw;
+        font-size: calc(0.7*var(--rvv));
+    }
 }
 
-
 @media only screen and (min-width: 750px) {
-    .log-title {
-        font-size: calc(1.2*var(--rvv));
+    .form-title img:hover {
+        transform: scale(1.1);
     }
+    .close-edit-form-button:hover {
+        transform: scale(1.1);
+    }
+    .remove-button:hover {
+        transform: scale(1.05);
+    }
+    .add-book img:hover {
+        transform: scale(1.1);
+    }
+    button:hover {
+        transform: scale(1.1);
+    }
+    .edit-name:hover {
+        font-style: italic;
+    }
+    .edit-goal:hover {
+        font-style: italic;
+    }
+    .read-button:hover,
+.want-to-read-button:hover {
+    transform: scale(1.1);
+}
 }

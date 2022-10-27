@@ -116,9 +116,9 @@
             addBook.addEventListener('click', () => {
                 Page.showAddBookForm();
             });
-            // attach click listeners to the new log and generate the header progress bar:
+            // attach click listeners to the new log and update the header progress bar:
             Page.attachLogListeners();
-            Page.generateProgressBar();
+            Page.updateProgressBar();
 
         };
 
@@ -179,7 +179,7 @@
     // module for everything page-related:
     const Page = (function() {
 
-        // establish empty variables for user's name and reading goal:
+        // initialize empty variable for user's name:
         let user;
 
         // method to set and save user's name:
@@ -188,6 +188,7 @@
             localStorage.setItem('user', user);
         }
 
+        // initialize empty variable for user's reading goal:
         let readingGoal;
 
         // method to set and save user's reading goal:
@@ -285,7 +286,7 @@
             const goalInput = document.querySelector('.goal-input').value;
             setReadingGoal(goalInput);
             renderPageTitle();
-            generateProgressBar();
+            updateProgressBar();
             hideWelcomeWindow();
         }
 
@@ -302,12 +303,13 @@
 
         // set the page title with the user's name:
         const renderPageTitle = () => {
-            const title = document.querySelector('.log-title');
+            const title = document.querySelector('.title-text');
             title.textContent = `${user}'s book log`;
+
         }
         
         // generate progress bar with user's reading goal:
-        function generateProgressBar() {
+        function updateProgressBar() {
             const readBooks = parseInt(document.querySelectorAll('.read-book').length);
             const progressBar = document.querySelector('.progress-bar');
             const progressMessage = document.querySelector('.progress-message');
@@ -317,6 +319,7 @@
             }
             progressBar.setAttribute('style', `width: ${percentageRead}%`);
             progressMessage.textContent = `${percentageRead}% of the way to your goal of ${readingGoal} books`;
+
         }
 
         // check if user & readingGoal are saved in localStorage; if not, show the welcome pop-up:
@@ -324,7 +327,7 @@
             user = localStorage.getItem('user');
             readingGoal = localStorage.getItem('readingGoal');
             renderPageTitle();
-            generateProgressBar();
+            updateProgressBar();
         } else if (!localStorage.getItem('user')) {
             showWelcomeWindow();
         }
@@ -354,6 +357,44 @@
                     Log.changeReadStatus(e);
                 });
             });
+        }
+
+        const addEditListeners = () => {
+            const editName = document.querySelector('.edit-name');
+            editName.addEventListener('click', renderEditForm);
+
+            const editGoal = document.querySelector('.edit-goal');
+            editGoal.addEventListener('click', renderEditForm);
+        }
+
+        const renderEditForm = () => {
+
+            // use the same pop-up as the welcome window:
+            showWelcomeWindow();
+
+            const welcomeWindow = document.querySelector('.welcome-window');
+            welcomeWindow.classList.add('edit-window');
+
+            // change the message:
+            const welcomeMessage = document.querySelector('.welcome-message');
+            welcomeMessage.textContent = 'edit your name and reading goal below:';
+            welcomeMessage.classList.add('edit-form-title');
+
+            // load the user's name into the name input field:
+            const nameInput = document.querySelector('.name-input');
+            nameInput.value = user;
+
+            // and load their reading goal into the goal input field:
+            const goalInput = document.querySelector('.goal-input');
+            goalInput.value = readingGoal;
+
+            // add a close button in case the user wishes to exit without changing their name or goal:
+            const closeFormButton = document.createElement('img');
+            closeFormButton.classList.add('close-form-button', 'close-edit-form-button');
+            closeFormButton.setAttribute('src', 'img/svg/close.svg');
+            closeFormButton.setAttribute('alt', 'Close the form');
+            welcomeMessage.appendChild(closeFormButton);
+
         }
 
         function showAddBookForm() {
@@ -488,15 +529,17 @@
         }
 
         return {
-            generateProgressBar,
+            updateProgressBar,
             attachLogListeners,
             attachFormListeners,
-            showAddBookForm
+            showAddBookForm,
+            addEditListeners
         }
 
     })();
 
     Log.generateLog();
     Page.attachFormListeners();
+    Page.addEditListeners();
 
 })();
