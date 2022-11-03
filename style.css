@@ -82,29 +82,41 @@ body {
     max-width: 100%;
     display: flex;
     flex-direction: column;
-    gap: calc(var(--rvv));
+    gap: calc(0.8*var(--rvv));
 }
 
 .name-section,
 .goal-section {
     display: grid;
     grid-template-columns: 3fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr calc(var(--rvv));
+    align-items: center;
+    position: relative;
+}
+
+.name-section {
     grid-template-areas: 
         "label input"
-        "label error";
-    align-items: center;
+        ". error";
+}
+
+.goal-section {
+    grid-template-areas: 
+    ". input"
+    "label error";
 }
 
 .name-label,
 .goal-label {
-    margin-right: calc(0.3*var(--rvv));
     align-self: start;
+    margin-right: calc(0.3*var(--rvv));
     grid-area: label;
+    font-size: calc(0.5*var(--rvv));
 }
 
-.name-label {
+.goal-label {
     position: relative;
+    bottom: calc(1.3*var(--rvv));
 }
 
 .name-label::after {
@@ -124,17 +136,25 @@ body {
     max-width: calc(5*var(--rvv));
 }
 
+.welcome-form input:not(:placeholder-shown):not(:valid) {
+    background-color: #fbfbac;
+}
+
+input[name='goal']:valid:not(:placeholder-shown) {
+    background-color: #5fc45e !important;
+}
+
 .name-error,
 .goal-error {
+    font-style: italic;
     align-self: start;
     grid-area: error;
     text-align: right;
-    font-size: calc(0.45*var(--rvv));
+    font-size: calc(0.4*var(--rvv));
     margin-right: calc(0.3*var(--rvv));
 }
 
 .welcome-form-button-container {
-    margin-top: calc(-0.5*var(--rvv));
     display: flex;
     justify-content: center;
     align-items: center;

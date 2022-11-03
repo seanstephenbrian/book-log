@@ -266,7 +266,7 @@
                         goalInput.setAttribute('name', 'goal');
                         goalInput.setAttribute('id', 'goal');
                         goalInput.setAttribute('placeholder', 'example: 15');
-                        goalInput.setAttribute('min', '0');
+                        goalInput.setAttribute('min', '1');
                         goalSection.appendChild(goalInput);
 
                         // add event listener for goal input:
@@ -314,27 +314,40 @@
             const error = document.querySelector('.goal-error');
             const goalInput = document.querySelector('.goal-input');
             if (goalInput.validity.rangeUnderflow) {
-                error.textContent = 'please choose a positive number for your reading goal.'
+                error.textContent = 'if you set a goal, it must be a number greater than 0'
             } else {
                 error.textContent = '';
             }
         }
 
         // validation for form submit:
-        function validateForm (e) {
-            e.preventDefault;
+        function validateForm (event) {
             const form = document.querySelector('.welcome-form');
+            const nameInput = document.querySelector('.name-input');
+            const goalInput = document.querySelector('.goal-input');
             if (form.checkValidity()) {
-                submitWelcomeForm();
+                submitWelcomeForm(event);
             } 
             else if (!form.checkValidity()) {
-                validateName();
-                validateGoal();
+                event.preventDefault();
+                const nameError = document.querySelector('.name-error');
+                if (!nameInput.validity.valid) {
+                    nameError.textContent = 'your name must be at least 2 characters long';
+                } else {
+                    nameError.textContent = '';
+                }
+                const goalError = document.querySelector('.goal-error');
+                if (!goalInput.validity.valid) {
+                    goalError.textContent = 'if you set a goal, it must be a number greater than 0';
+                } else {
+                    goalError.textContent = '';
+                }
             }
         }
 
         // set user and readingGoal variables based on input from the submitted form:
-        const submitWelcomeForm = () => {
+        const submitWelcomeForm = (event) => {
+            event.preventDefault();
             const nameInput = document.querySelector('.name-input').value;
             setUser(nameInput);
             const goalInput = document.querySelector('.goal-input').value;
@@ -367,12 +380,26 @@
             const readBooks = parseInt(document.querySelectorAll('.read-book').length);
             const progressBar = document.querySelector('.progress-bar');
             const progressMessage = document.querySelector('.progress-message');
-            const percentageRead = parseInt(readBooks / readingGoal * 100);
-            if (percentageRead > 100) {
-                percentageRead = 100;
+            if (readingGoal) {
+                const percentageRead = parseInt(readBooks / readingGoal * 100);
+                if (percentageRead > 100) {
+                    percentageRead = 100;
+                }
+                progressBar.setAttribute('style', `width: ${percentageRead}%`);
+                progressMessage.textContent = `${percentageRead}% of the way to your goal of ${readingGoal} books`;
+            } else {
+                if (readBooks === 0) {
+                    progressBar.setAttribute('style', `width: 0`);
+                } else {
+                    progressBar.setAttribute('style', `width: 100%`);
+                }
+                if (readBooks === 1) {
+                    progressMessage.textContent = `you've read ${readBooks} book this year`;
+                } else {
+                    progressMessage.textContent = `you've read ${readBooks} books this year`;
+                }
             }
-            progressBar.setAttribute('style', `width: ${percentageRead}%`);
-            progressMessage.textContent = `${percentageRead}% of the way to your goal of ${readingGoal} books`;
+            
 
         }
 
