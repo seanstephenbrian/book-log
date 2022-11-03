@@ -215,6 +215,7 @@
                 const welcomeForm = document.createElement('form');
                 welcomeForm.classList.add('welcome-form');
                 welcomeForm.setAttribute('action', '');
+                welcomeForm.setAttribute('novalidate', '');
                 welcomeForm.setAttribute('method', 'post');
                 welcomeWindow.appendChild(welcomeForm);
 
@@ -235,16 +236,24 @@
                         nameInput.setAttribute('type', 'text');
                         nameInput.setAttribute('name', 'name');
                         nameInput.setAttribute('id', 'name');
-                        nameInput.setAttribute('placeholder', 'example: Helen');
                         nameInput.setAttribute('required', '');
+                        nameInput.setAttribute('placeholder', 'example: Helen');
+                        nameInput.setAttribute('minlength', '2');
                         nameSection.appendChild(nameInput);
+
+                        // add event listener for name input:
+                        nameInput.addEventListener('input', validateName);
+
+                        const nameError = document.createElement('div');
+                        nameError.classList.add('name-error');
+                        nameSection.appendChild(nameError);
 
                     // create reading goal section:
                     const goalSection = document.createElement('div');
                     goalSection.classList.add('goal-section');
                     welcomeForm.appendChild(goalSection);
 
-                        // create name label & input:
+                        // create goal label & input:
                         const goalLabel = document.createElement('label');
                         goalLabel.classList.add('goal-label');
                         goalLabel.setAttribute('for', 'goal');
@@ -257,7 +266,15 @@
                         goalInput.setAttribute('name', 'goal');
                         goalInput.setAttribute('id', 'goal');
                         goalInput.setAttribute('placeholder', 'example: 15');
+                        goalInput.setAttribute('min', '0');
                         goalSection.appendChild(goalInput);
+
+                        // add event listener for goal input:
+                        goalInput.addEventListener('input', validateGoal);
+
+                        const goalError = document.createElement('div');
+                        goalError.classList.add('goal-error');
+                        goalSection.appendChild(goalError);
 
                     // create submit button:
                     const buttonContainer = document.createElement('div');
@@ -271,16 +288,53 @@
                         buttonContainer.appendChild(submitButton);
 
                 // add event listener for form submission:
-                welcomeForm.addEventListener('submit', submitWelcomeForm);
+                welcomeForm.addEventListener('submit', validateForm);
 
             // blur the background:
             const mainSection = document.querySelector('.main');
             mainSection.classList.add('blur');
         }
 
-        // set user and readingGoal variables based on input from the submitted form:
-        const submitWelcomeForm = (e) => {
+        // validation for name input in welcome form:
+        function validateName () {
+            const error = document.querySelector('.name-error');
+            const nameInput = document.querySelector('.name-input');
+            if (nameInput.validity.valueMissing) {
+                error.textContent = 'please enter your name.'
+            }
+            else if (nameInput.validity.tooShort) {
+                error.textContent = 'your name must be at least 2 characters long';
+            } else {
+                error.textContent = '';
+            }
+        }
+
+        // validation for goal input field in welcome form:
+        function validateGoal () {
+            const error = document.querySelector('.goal-error');
+            const goalInput = document.querySelector('.goal-input');
+            if (goalInput.validity.rangeUnderflow) {
+                error.textContent = 'please choose a positive number for your reading goal.'
+            } else {
+                error.textContent = '';
+            }
+        }
+
+        // validation for form submit:
+        function validateForm (e) {
             e.preventDefault;
+            const form = document.querySelector('.welcome-form');
+            if (form.checkValidity()) {
+                submitWelcomeForm();
+            } 
+            else if (!form.checkValidity()) {
+                validateName();
+                validateGoal();
+            }
+        }
+
+        // set user and readingGoal variables based on input from the submitted form:
+        const submitWelcomeForm = () => {
             const nameInput = document.querySelector('.name-input').value;
             setUser(nameInput);
             const goalInput = document.querySelector('.goal-input').value;

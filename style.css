@@ -89,9 +89,18 @@ body {
 .goal-section {
     display: grid;
     grid-template-columns: 3fr 1fr;
-    grid-template-rows: 1fr;
-    column-gap: calc(0.1*var(--rvv));
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+        "label input"
+        "label error";
     align-items: center;
+}
+
+.name-label,
+.goal-label {
+    margin-right: calc(0.3*var(--rvv));
+    align-self: start;
+    grid-area: label;
 }
 
 .name-label {
@@ -108,8 +117,20 @@ body {
 }
 
 .welcome-form input {
+    align-self: end;
+    grid-area: input;
     height: calc(var(--rvv));
     max-height: calc(var(--rvv));
+    max-width: calc(5*var(--rvv));
+}
+
+.name-error,
+.goal-error {
+    align-self: start;
+    grid-area: error;
+    text-align: right;
+    font-size: calc(0.45*var(--rvv));
+    margin-right: calc(0.3*var(--rvv));
 }
 
 .welcome-form-button-container {
