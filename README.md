@@ -20,8 +20,8 @@ when one hovers over them. listeners also help with client-side form validation 
 
 the final element that i focused on -- which was not in the initial design prompt but seemed like it
 would be a fun addition -- is a reading goal progress bar within the header.
-as the user adds or removes books to/from their log, a message reading '<code>${x%}</code> of the way to your goal 
-of <code>${y}</code> books' is automatically updated and a green progress <code>div</code> advances exactly x%
+as the user adds or removes books to/from their log, a message reading '<code>x%</code> of the way to your goal 
+of <code>y</code> books' is automatically updated and a green progress <code>div</code> advances exactly x%
 of the way across this part of the header.
 
 UPDATE: i returned to this project to add storage with the localStorage API. i also created a welcome
