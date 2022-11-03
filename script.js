@@ -287,7 +287,7 @@
                         submitButton.textContent = 'submit';
                         buttonContainer.appendChild(submitButton);
 
-                // add event listener for form submission:
+                // add event listener for validation on form submission:
                 welcomeForm.addEventListener('submit', validateForm);
 
             // blur the background:
@@ -399,8 +399,6 @@
                     progressMessage.textContent = `you've read ${readBooks} books this year`;
                 }
             }
-            
-
         }
 
         // check if user & readingGoal are saved in localStorage; if not, show the welcome pop-up:
